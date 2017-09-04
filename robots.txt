@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://reallysketch.com/sitemap.txt
+Sitemap: https://reallysketch.com/sitemap.txt
