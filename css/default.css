@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+* {
+  margin: 0;
+}
+html {
+  height: 100%;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: space-between;
+}
+h1, h2, h3 {
+  font-weight: normal;
+}
+ul, p, h3 {
+  margin: 16px 0;
+}
+h1 {
+  font-size: 25px;
+}
+h2 {
+  font-size: 23px;
+}
+h3 {
+  font-size: 18px;
+}
+img {
+  display: block;
+  float: left;
+  max-width: 100%;
+}
+header {
+  color: #fff;
+  background: #36c;
+  padding: 16px 24px;
+}
+header div {
+  max-width: 960px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header aside {
+  flex-basis: 50%;
+}
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+.cta {
+  padding: 16px 0 0;
+}
+header p a, .cta a {
+  color: #fff;
+  text-decoration: none;
+  background: #36c;
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: 2px solid #fff;
+}
+main {
+  padding: 16px 24px;
+  flex-grow: 1;
+}
+main div {
+  max-width: 960px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px 0;
+}
+main aside {
+  align-self: flex-start;
+}
+footer {
+  color: #aaa;
+  background: #eee;
+  padding: 16px 24px;
+}
+footer div {
+  max-width: 960px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+footer section {
+  flex-basis: 20%;
+}
+footer a {
+  color: #444;
+}
+footer p {
+  text-align: center;
+}
+nav {
+  border-top: 2px solid #ddd;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  line-height: 2;
+}
+.hero {
+  padding: 0 32px;
+}
+.text {
+  flex-basis: 100%;
+  max-width: 640px;
+}
+
+
+@media screen and (max-width: 640px) {
+  main div {
+    flex-direction: column;
+  }
+  .hero {
+    padding: 32px 0 0;
+  }
+}
