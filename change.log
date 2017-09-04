@@ -202,3 +202,14 @@ changed zero length lines into tiny circles
 added points array to drawing
 populating with endpoints of lines and endpoints and centerpoint of arcs
 added endpoint snap
+
+--------------------
+0.2.3
+--------------------
+
+uploaded to github
+added license and readme
+enabled ssl
+added landing pages
+fixed contact link in Chrome
+fixed options close button in Chrome

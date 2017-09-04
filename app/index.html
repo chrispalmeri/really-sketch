@@ -580,7 +580,7 @@ function buttonClick(e) {
       drawing.import();
     }
   }
-  youClicked[e.target.id]();
+  youClicked[e.currentTarget.id]();
 }
 
 function dialogClick(e) {
@@ -1076,7 +1076,7 @@ input:disabled {
   <section id="about">
     <h3>About</h3>
     <h2 style="text-align: center; margin: 0">reallysketch.com</h2>
-    <p style="text-align: center;">version 0.2.2</p>
+    <p style="text-align: center;">version 0.2.3</p>
     <p>The inspiration was from an older <a target="_blank" href="http://tommaitland.net/2012/07/online-graph-paper-tool/">online graph paper</a>.
       If there is something that should be improved, <a id="dynamic" href="#">let me know</a>.
       Or, if you find this extremely useful and use it all the time, <a target="_blank" href="https://www.paypal.me/chrispalmeri">beer me</a>.</p>
