@@ -1,0 +1,3 @@
+<?php
+require '../../deploy.php';
+?>
