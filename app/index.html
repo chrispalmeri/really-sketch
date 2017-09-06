@@ -193,6 +193,16 @@ drawing.refresh = function() {
   canvas.lineWidth = 2;
   canvas.strokeStyle = "#333";
   this.drawing.objects.forEach(function(obj) {
+    if (obj.colour) {
+      canvas.strokeStyle = obj.colour;
+    } else {
+      canvas.strokeStyle = "#333";
+    }
+    if (obj.width) {
+      canvas.lineWidth = obj.width;
+    } else {
+      canvas.lineWidth = 2;
+    }
     canvas.beginPath();
     if(obj.type === "line") {
       if(obj.x === obj.u && obj.y === obj.v) {
@@ -218,6 +228,7 @@ drawing.refresh = function() {
       canvas.shadowBlur = 0;
     }
   });
+  canvas.lineWidth = 2;
   canvas.strokeStyle = "#D6D6D6";
 }
 drawing.import = function() {
@@ -346,6 +357,8 @@ function Line() {
     canvas.fill();
   }
   this.save = function() {
+    this.coords.colour = document.getElementById('line_colour').value;
+    this.coords.width = document.getElementById('line_width').value;
     drawing.drawing.objects.push(this.coords);
     drawing.drawing.points.push([this.coords.x, this.coords.y]);
     drawing.drawing.points.push([this.coords.u, this.coords.v]);
@@ -417,6 +430,8 @@ function Arc() {
     canvas.fill();
   }
   this.save = function() {
+    this.coords.colour = document.getElementById('line_colour').value;
+    this.coords.width = document.getElementById('line_width').value;
     drawing.drawing.objects.push(this.coords);
     drawing.drawing.points.push([this.coords.x, this.coords.y]);
     drawing.drawing.points.push([this.coords.x + this.coords.r * Math.cos(this.coords.a), this.coords.y + this.coords.r * Math.sin(this.coords.a)]);
@@ -769,6 +784,11 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   text-align: center;
   padding: 4px;
 }
+.actions select {
+  width: 68px;
+  position: relative;
+  margin-bottom: 8px;
+}
 .dialog {
   position: absolute;
   top: 0;
@@ -926,6 +946,26 @@ input:disabled {
     <li><button id="color-button">Color</button></li>
     <li><button id="undo-button">Undo</button></li>
     <li><button id="options-button">Options</a></li>
+    <li>
+      <select id="line_colour">
+        <option value="#333" selected>Black</option>
+        <option>Red</option>
+        <option>Orange</option>
+        <option>Yellow</option>
+        <option>Green</option>
+        <option >Blue</option>
+        <option>Purple</option>
+      </select>
+    </li>
+    <li>
+      <select id="line_width">
+        <option>1</option>
+        <option selected>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </li>
   </ul>
 </nav>
 
@@ -1076,7 +1116,7 @@ input:disabled {
   <section id="about">
     <h3>About</h3>
     <h2 style="text-align: center; margin: 0">reallysketch.com</h2>
-    <p style="text-align: center;">version 0.2.3</p>
+    <p style="text-align: center;">version 0.2.4</p>
     <p>The inspiration was from an older <a target="_blank" href="http://tommaitland.net/2012/07/online-graph-paper-tool/">online graph paper</a>.
       If there is something that should be improved, <a id="dynamic" href="#">let me know</a>.
       Or, if you find this extremely useful and use it all the time, <a target="_blank" href="https://www.paypal.me/chrispalmeri">beer me</a>.</p>

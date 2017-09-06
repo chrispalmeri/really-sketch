@@ -213,3 +213,10 @@ enabled ssl
 added landing pages
 fixed contact link in Chrome
 fixed options close button in Chrome
+
+--------------------
+0.2.4
+--------------------
+
+Add webhook deploy on push
+Add line color and width selection
