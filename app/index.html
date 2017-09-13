@@ -140,7 +140,7 @@ drawing.refresh = function() {
   bgcanvas.translate(0.5, 0.5);
   canvas.clearRect(0, 0, canvas.canvas.width, canvas.canvas.height);
   bgcanvas.fillStyle = "#fff";
-  bgcanvas.fillRect(0, 0, bgcanvas.canvas.width, bgcanvas.canvas.height);
+  bgcanvas.fillRect(-1, -1, bgcanvas.canvas.width + 1, bgcanvas.canvas.height + 1);
   canvas.fillStyle = "#FFA0A0";
   canvas.lineCap = "square";
   
@@ -280,7 +280,7 @@ drawing.save = function() {
   if(name === "") {
     name = "Drawing";
   }
-  bgcanvas.drawImage(canvas.canvas, 0, 0);
+  bgcanvas.drawImage(canvas.canvas, -0.5, -0.5);
   var link = document.createElement("a");
   link.setAttribute("href", bgcanvas.canvas.toDataURL('image/png'));
   link.setAttribute("download", name + ".png");
