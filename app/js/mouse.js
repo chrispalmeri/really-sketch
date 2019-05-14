@@ -1,34 +1,36 @@
 import drawing from './drawing.js';
 import tool from './tool.js';
 
-var mouse = new Object();
-mouse.x = 0;
-mouse.y = 0;
-mouse.click = function(e) {
-  if(e.touches) {
-    mouse.x = e.changedTouches[0].pageX;
-    mouse.y = e.changedTouches[0].pageY - 48;
-  } else {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  }
-  tool.a.click(mouse.x, mouse.y);
-}
-mouse.move = function(e) {
-  if(e.touches) {
-    mouse.x = e.touches[0].clientX;
-    mouse.y = e.touches[0].clientY - 48;
-    e.preventDefault();
-  } else {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  }
-  drawing.refresh();
-  tool.a.move(mouse.x, mouse.y);
-}
-mouse.hide = function(e) {
-  document.getElementById("coords").style.display = "none";
-  drawing.refresh();
-}
+export default new function() {
+  this.x = 0;
+  this.y = 0;
 
-export default mouse;
+  this.click = function(e) {
+    if(e.touches) {
+      this.x = e.changedTouches[0].pageX;
+      this.y = e.changedTouches[0].pageY - 48;
+    } else {
+      this.x = e.clientX;
+      this.y = e.clientY;
+    }
+    tool.a.click(this.x, this.y);
+  }.bind(this);
+
+  this.move = function(e) {
+    if(e.touches) {
+      this.x = e.touches[0].clientX;
+      this.y = e.touches[0].clientY - 48;
+      e.preventDefault();
+    } else {
+      this.x = e.clientX;
+      this.y = e.clientY;
+    }
+    drawing.refresh();
+    tool.a.move(this.x, this.y);
+  }.bind(this);
+  
+  this.hide = function() {
+    document.getElementById("coords").style.display = "none";
+    drawing.refresh();
+  };
+}

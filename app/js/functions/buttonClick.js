@@ -34,7 +34,7 @@ export default function buttonClick(e) {
     "info": function () {
       // var dpi = "<table><tr><td width=\"60%\">Window Width:</td><td>" + document.body.clientWidth;
       // dpi += "</td></tr><tr><td>Device Pixel Ratio:</td><td>" + window.devicePixelRatio;
-      // dpi += "</td></tr><tr><td>Touch Screen:</td><td>" + touchscreen;
+      // dpi += "</td></tr><tr><td>Touch Screen:</td><td>" + interaction.touch;
       // dpi += "</td></tr></table>";
       // document.getElementById("dpi").innerHTML = dpi;
   

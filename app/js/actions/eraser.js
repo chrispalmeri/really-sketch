@@ -5,20 +5,24 @@ import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
 
-export function Eraser() {
+export default function Eraser() {
   help(interaction.text + " to position eraser");
+
   this.points = 0;
   this.coords = {};
   this.coords.type = "eraser";
+
   this.click = function(x, y) {
     this.save();
     this.reset();
-  }
+  };
+
   this.reset = function() {
     tool.a = new Eraser();
     drawing.refresh();
     tool.a.move(mouse.x, mouse.y);
-  }
+  };
+
   this.move = function(x, y) {
     if(this.points === 0) {
       this.coords.x = x;
@@ -36,9 +40,10 @@ export function Eraser() {
     canvas.f.beginPath();
     canvas.f.arc(x, y, 2.5, 0, 2 * Math.PI, true);
     canvas.f.fill();
-  }
+  };
+
   this.save = function() {
     drawing.drawing.objects.push(this.coords);
     mouse.hide();
-  }
+  };
 }

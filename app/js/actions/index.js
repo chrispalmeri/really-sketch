@@ -1,3 +1,3 @@
-export {Line} from './line.js'
-export {Arc} from './arc.js'
-export {Eraser} from './eraser.js'
+export {default as Line} from './line.js'
+export {default as Arc} from './arc.js'
+export {default as Eraser} from './eraser.js'

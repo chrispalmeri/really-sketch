@@ -1,5 +1,3 @@
-var tool = {
-  a: ''
-}
-
-export default tool;
+export default new function() {
+  this.a = ''
+};

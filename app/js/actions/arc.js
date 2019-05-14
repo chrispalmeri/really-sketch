@@ -6,11 +6,13 @@ import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
 
-export function Arc() {
+export default function Arc() {
   help(interaction.text + " to set new arc center point");
+
   this.points = 0;
   this.coords = {};
   this.coords.type = "arc";
+
   this.click = function(x, y) {
     this.points = this.points + 1;
     if(this.points === 1) {
@@ -21,12 +23,14 @@ export function Arc() {
       this.save();
       this.reset();
     }
-  }
+  };
+
   this.reset = function() {
     tool.a = new Arc();
     drawing.refresh();
     tool.a.move(mouse.x, mouse.y);
-  }
+  };
+
   this.move = function(x, y) {
     var snapped;
     if(this.points === 0) {
@@ -68,7 +72,8 @@ export function Arc() {
     canvas.f.beginPath();
     canvas.f.arc(snapped.x, snapped.y, 2.5, 0, 2 * Math.PI, true);
     canvas.f.fill();
-  }
+  };
+
   this.save = function() {
     this.coords.colour = document.getElementById('line_colour').value;
     this.coords.width = document.getElementById('line_width').value;
@@ -77,5 +82,5 @@ export function Arc() {
     drawing.drawing.points.push([this.coords.x + this.coords.r * Math.cos(this.coords.a), this.coords.y + this.coords.r * Math.sin(this.coords.a)]);
     drawing.drawing.points.push([this.coords.x + this.coords.r * Math.cos(this.coords.b), this.coords.y + this.coords.r * Math.sin(this.coords.b)]);
     mouse.hide();
-  }
+  };
 }
