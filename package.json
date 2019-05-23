@@ -1,0 +1,22 @@
+{
+  "name": "really-sketch",
+  "version": "0.3.0",
+  "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
+  "main": "app/js/bundle.js",
+  "scripts": {
+    "serve": "rollup app/js/index.js -o app/js/bundle.js -f cjs -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrispalmeri/really-sketch.git"
+  },
+  "author": "Chris Palmeri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrispalmeri/really-sketch/issues"
+  },
+  "homepage": "https://github.com/chrispalmeri/really-sketch#readme",
+  "devDependencies": {
+    "rollup": "^1.12.3"
+  }
+}
