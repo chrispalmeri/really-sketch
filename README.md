@@ -6,9 +6,7 @@ Simple online graph paper with basic drafting tools. Mobile friendly.
 
 `npm install`
 
-`npm run serve` to watch for changes in app/js/ and build app/js/bundle.js
-
-`<script src="js/index.js" type="module"></script>` works locally in Firefox too
+`npm run serve` to watch for changes in src/ and build app/js/bundle.js
 
 ### Known Warning
 

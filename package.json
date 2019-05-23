@@ -4,7 +4,7 @@
   "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
   "main": "app/js/bundle.js",
   "scripts": {
-    "serve": "rollup app/js/index.js -o app/js/bundle.js -f cjs -w"
+    "serve": "rollup src/index.js -o app/js/bundle.js -f cjs -w"
   },
   "repository": {
     "type": "git",
