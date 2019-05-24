@@ -1,9 +1,19 @@
 import drawing from './drawing.js';
 import tool from './tool.js';
+import canvas from './canvas.js';
+
 
 export default new function() {
   this.x = 0;
   this.y = 0;
+
+  this.load = function() {
+    canvas.f.canvas.addEventListener("mousedown", this.click);
+    canvas.f.canvas.addEventListener("mousemove", this.move);
+    canvas.f.canvas.addEventListener("touchend", this.click);
+    canvas.f.canvas.addEventListener("touchmove", this.move);
+    canvas.f.canvas.addEventListener("mouseout", this.hide);
+  }.bind(this);
 
   this.click = function(e) {
     if(e.touches) {

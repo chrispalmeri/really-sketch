@@ -1,5 +1,6 @@
 import drawing from './drawing.js';
 import tool from './tool.js';
+import mouse from './mouse.js';
 
 // hmm, need them to execute but not using after that
 import buttonClick from './functions/buttonClick.js';
@@ -15,6 +16,8 @@ window.addEventListener("load", function () {
   
   document.getElementById("dynamic").setAttribute("href", "mail" + decodeURIComponent("to" + ":" + "chrispalmeri" + "%40%67%6d%61%69") + "l.com");
   
+  mouse.load();
+
   tool.a = new Line();
   drawing.refresh();
 });
