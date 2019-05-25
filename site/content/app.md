@@ -12,8 +12,9 @@
 <link rel="manifest" href="/manifest.json" />
 <link rel="icon" sizes="192x192" href="/icon-192.png" />
 <link rel="icon" sizes="16x16" href="/favicon.ico" />
-<script src="js/bundle.js"></script>
-<link rel="stylesheet" href="css/index.css" />
+{{ $js := resources.Get "js/bundle.js" | minify }}
+<script src="{{ $js.RelPermalink }}"></script>
+<link rel="stylesheet" href="/css/app.css" />
 </head>
 <body>
 
