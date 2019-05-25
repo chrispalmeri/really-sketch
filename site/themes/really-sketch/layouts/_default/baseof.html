@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="{{ .Description }}" />
+    <meta property="og:image" content="https://reallysketch.com/thumbnail.png" />
+    <title>{{ .Site.Title }}</title>
+    <link rel="canonical" href="{{ .Page.Permalink }}" />
+    <link rel="alternate" hreflang="en" href="{{ .Page.Permalink }}">
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" sizes="16x16" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/default.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/">{{ .Site.Title }}</a></h1>
+        <p><a href="app/">Launch App</a></p>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        {{ block "main" . }}
+          <!-- The part of the page that begins to differ between templates -->
+        {{ end }}
+      </div>
+    </main>
+
+    <footer>
+      <div>
+        <section>
+          <h3>About</h3>
+          <nav>
+            <ul>
+              {{ range .Site.Menus.about }}
+                <li><a id="{{ .Identifier }}" href="{{ .URL }}">{{ .Name }}</a></li>
+              {{ end }}
+            </ul>
+          </nav>
+        </section>
+        <section>
+          <h3>Contribute</h3>
+          <nav>
+            <ul>
+              {{ range .Site.Menus.contrib }}
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+              {{ end }}
+            </ul>
+          </nav>
+        </section>
+        <section>
+          <h3>Legal</h3>
+          <nav>
+            <ul>
+              {{ range .Site.Menus.legal }}
+                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+              {{ end }}
+            </ul>
+          </nav>
+        </section>
+      </div>
+      <p>&copy; {{ .Site.Copyright }}</p>
+    </footer>
+    <script>
+      document.getElementById("dynamic").setAttribute("href", "mail" + decodeURIComponent("to" + ":" + "chrispalmeri" + "%40%67%6d%61%69") + "l.com");
+    </script>
+  </body>
+</html>
