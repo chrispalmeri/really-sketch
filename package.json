@@ -4,8 +4,12 @@
   "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
   "main": "app/js/bundle.js",
   "scripts": {
-    "serve": "rollup src/index.js -o site/assets/bundle.js -f cjs -w",
-    "build": "rollup src/index.js -o site/assets/bundle.js -f cjs"
+    "serve": "npm-run-all -p serve:*",
+    "serve:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs -w",
+    "serve:hugo": "hugo server -ws site",
+    "build": "npm-run-all -s build:*",
+    "build:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs",
+    "build:hugo": "hugo -s site -d ../dist"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,8 @@
   },
   "homepage": "https://github.com/chrispalmeri/really-sketch#readme",
   "devDependencies": {
+    "hugo-bin": "^0.43.6",
+    "npm-run-all": "^4.1.5",
     "rollup": "^1.12.3"
   }
 }
