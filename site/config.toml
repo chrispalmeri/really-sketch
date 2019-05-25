@@ -4,6 +4,7 @@ title = "Really Sketch"
 description = "Simple online graph paper with basic drafting tools. Easy to use. Create your own precision drawings, floor plans, and blueprints for free."
 theme = "really-sketch"
 copyright = "2017 Chris Palmeri"
+disableKinds = ["section", "taxonomy", "taxonomyTerm"]
 
 [menu]
 
@@ -22,3 +23,6 @@ copyright = "2017 Chris Palmeri"
     name = "PayPal"
     url = "https://www.paypal.me/chrispalmeri"
     weight = 2
+
+[blackfriday]
+  smartypants = false
