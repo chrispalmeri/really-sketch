@@ -1,76 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="description" content="Simple online graph paper with basic drafting tools. Easy to use. Create your own precision drawings, floor plans, and blueprints for free." />
-    <meta property="og:image" content="https://reallysketch.com/thumbnail.png" />
-    <title>Really Sketch</title>
-    <link rel="canonical" href="https://reallysketch.com/" />
-    <link rel="alternate" hreflang="en" href="https://reallysketch.com/">
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" sizes="192x192" href="/icon-192.png" />
-    <link rel="icon" sizes="16x16" href="/favicon.ico" />
-    <link rel="stylesheet" href="css/default.css" />
-  </head>
-  <body>
-    <header>
-      <div>
-        <h1><a href="/">Really Sketch</a></h1>
-        <p><a href="app/">Launch App</a></p>
-      </div>
-    </header>
-
-    <main>
-      <div>
-        <aside>
-          <img src="png/hero.png" />
-        </aside>
-        <article class="hero">
-          <h2>What is this?</h2>
-          <p>Online graph paper, the kind that you can interact with the way you would with a real sheet of graph paper. A digital translation, if you will, of a kid with a piece of graph paper, a pencil, a straight edge, and a compass.</p>
-          <p>It is by no means a fully fledged drafting program, or a CAD replacement, or vector art software, or anything like that. It wants to be more like the Microsoft Paint of 2D drafting.</p>
-          <p>Hopefully much easier to pick up than more serious software, but still giving you the ability to sketch cool stuff with enough patience.</p>
-          <p class="cta"><a href="app/">Start drawing</a></p>
-        </article>
-      </div>
-    </main>
-
-    <footer>
-      <div>
-        <section>
-          <h3>About</h3>
-          <nav>
-            <ul>
-              <li><a href="about.html">About</a></li>
-              <li><a id="dynamic" href="#">Contact</a></li>
-            </ul>
-          </nav>
-        </section>
-        <section>
-          <h3>Contribute</h3>
-          <nav>
-            <ul>
-              <li><a href="https://github.com/chrispalmeri/really-sketch">GitHub</a></li>
-              <li><a href="https://www.paypal.me/chrispalmeri">PayPal</a></li>
-            </ul>
-          </nav>
-        </section>
-        <section>
-          <h3>Legal</h3>
-          <nav>
-            <ul>
-              <li><a href="terms.html">Terms of Use</a></li>
-              <li><a href="privacy.html">Privacy Policy</a></li>
-            </ul>
-          </nav>
-        </section>
-      </div>
-      <p>&copy; 2017 Chris Palmeri</p>
-    </footer>
-    <script>
-      document.getElementById("dynamic").setAttribute("href", "mail" + decodeURIComponent("to" + ":" + "chrispalmeri" + "%40%67%6d%61%69") + "l.com");
-    </script>
-  </body>
-</html>
+---
+title: "Home"
+---
+    
+<aside>
+  <img src="png/hero.png" />
+</aside>
+<article class="hero">
+  <h2>What is this?</h2>
+  <p>Online graph paper, the kind that you can interact with the way you would with a real sheet of graph paper. A digital translation, if you will, of a kid with a piece of graph paper, a pencil, a straight edge, and a compass.</p>
+  <p>It is by no means a fully fledged drafting program, or a CAD replacement, or vector art software, or anything like that. It wants to be more like the Microsoft Paint of 2D drafting.</p>
+  <p>Hopefully much easier to pick up than more serious software, but still giving you the ability to sketch cool stuff with enough patience.</p>
+  <p class="cta"><a href="/app/">Start drawing</a></p>
+</article>
