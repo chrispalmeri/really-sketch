@@ -1,7 +1,7 @@
 ---
 title: "Who made this?"
 menu: about
-weight: 1
+weight: 2
 linkTitle: "About"
 ---
 

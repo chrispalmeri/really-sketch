@@ -12,7 +12,7 @@ disableKinds = ["section", "taxonomy", "taxonomyTerm", "RSS"]
     identifier = "dynamic"
     name = "Contact"
     url = "#"
-    weight = 2
+    weight = 3
 
   [[menu.contrib]]
     name = "GitHub"
