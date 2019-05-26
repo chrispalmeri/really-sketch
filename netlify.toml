@@ -1,0 +1,21 @@
+[build]
+  base = "/"
+  command = "npm run build"
+  publish = "dist/"
+
+# A redirect rule with all the supported properties
+[[redirects]]
+  from = "/drawing.png"
+  to = "/thumbnail.png"
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about/"
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms/"
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
