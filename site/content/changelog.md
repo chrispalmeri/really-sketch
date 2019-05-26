@@ -7,12 +7,15 @@ weight: 1
 
 Changes to this project will be documented here.
 
-### [Unreleased]
+### [0.3.0] - 2019-05-26
 
-  * javascript modules
-  * node
-  * hugo
-  * updated changelog
+  * split javascript into modules, bundle with rollup.js
+  * use hugo to build site from markdown and theme
+  * added node.js dev dependencies
+  * reorganize directories
+  * reformated changelog
+  * update readme
+  * deploy with netlify
 
 ### [0.2.4] - 2017-09-12
 
