@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://reallysketch.com/sitemap.xml

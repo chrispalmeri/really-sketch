@@ -1,0 +1,28 @@
+baseURL = "https://reallysketch.com/"
+languageCode = "en-us"
+title = "Really Sketch"
+description = "Simple online graph paper with basic drafting tools. Easy to use. Create your own precision drawings, floor plans, and blueprints for free."
+theme = "really-sketch"
+copyright = "2017 Chris Palmeri"
+disableKinds = ["section", "taxonomy", "taxonomyTerm", "RSS"]
+
+[menu]
+
+  [[menu.about]]
+    identifier = "dynamic"
+    name = "Contact"
+    url = "#"
+    weight = 3
+
+  [[menu.contrib]]
+    name = "GitHub"
+    url = "https://github.com/chrispalmeri/really-sketch"
+    weight = 1
+
+  [[menu.contrib]]
+    name = "PayPal"
+    url = "https://www.paypal.me/chrispalmeri"
+    weight = 2
+
+[blackfriday]
+  smartypants = false
