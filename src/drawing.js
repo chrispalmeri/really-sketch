@@ -128,9 +128,9 @@ export default new function() {
   this.import = function() {
     var upload = document.createElement("input");
     upload.setAttribute("type", "file");
-    upload.onchange = function() {
+    upload.onchange = function(e) {
       var reader = new FileReader();
-      var file = this.files[0];
+      var file = e.target.files[0];
       reader.readAsText(file, "utf-8");
       reader.onload = function (e) {
         var temp = JSON.parse(e.target.result);
@@ -145,8 +145,8 @@ export default new function() {
         }
         document.getElementById("name").value = this.drawing.name;
         this.refresh();
-      }
-    }
+      }.bind(this);
+    }.bind(this);
     upload.click();
   };
 
