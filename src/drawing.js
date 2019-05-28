@@ -109,6 +109,10 @@ export default new function() {
       } else if(obj.type === "arc") {
         canvas.f.arc(obj.x, obj.y, obj.r, obj.a, obj.b, true);
         canvas.f.stroke();
+      } else if(obj.type === "text") {
+        canvas.f.font = "16px Arial";
+        canvas.f.fillStyle = obj.colour;
+        canvas.f.fillText(obj.text, obj.x, obj.y);
       } else if(obj.type === "eraser") {
         canvas.f.globalCompositeOperation = 'destination-out';
         canvas.f.arc(obj.x, obj.y - canvas.f.canvas.height, obj.r, 0, 2 * Math.PI, true);
@@ -123,6 +127,7 @@ export default new function() {
     });
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = "#D6D6D6";
+    canvas.f.fillStyle = "#FFA0A0";
   };
 
   this.import = function() {

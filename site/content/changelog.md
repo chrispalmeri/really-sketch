@@ -7,6 +7,10 @@ weight: 1
 
 Changes to this project will be documented here.
 
+### [0.3.1] - unreleased
+
+  * add text
+
 ### [0.3.0] - 2019-05-26
 
   * split javascript into modules, bundle with rollup.js
