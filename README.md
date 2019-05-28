@@ -15,3 +15,7 @@ Clone the repo and then `npm install`.
 `npm run serve` to run locally.
 
 `npm run build` to output to `dist/`.
+
+## Kudos
+
+[Routed Gothic Font](https://github.com/dse/routed-gothic)
