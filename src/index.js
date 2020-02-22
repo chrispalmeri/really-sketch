@@ -11,6 +11,10 @@ import selectChange from './functions/selectChange.js';
 import Line from './actions/line.js'
 
 window.addEventListener("load", function () {
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/worker.js');
+  }
+
   document.getElementById("file-link").className = "active";
   document.getElementById("file").className = "active";
   
