@@ -7,6 +7,12 @@ weight: 1
 
 Changes to this project will be documented here.
 
+### [0.3.1] - 2020-02-22
+
+  * Updates to enable Progressive Web App
+  * Add a bunch of homescreen icons
+  * Add service worker to work offline
+
 ### [0.3.0] - 2019-05-26
 
   * split javascript into modules, bundle with rollup.js
