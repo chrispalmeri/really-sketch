@@ -1,15 +1,21 @@
 ---
 title: "Changelog"
-date: 2017-09-04T21:30:00-05:00
+date: 2020-04-22T19:08:00-05:00
 menu: about
 weight: 1
 ---
 
 Changes to this project will be documented here.
 
-### [0.3.1] - unreleased
+### [0.3.2] - unreleased
 
   * add text
+
+### [0.3.1] - 2020-02-22
+
+  * Updates to enable Progressive Web App
+  * Add a bunch of homescreen icons
+  * Add service worker to work offline
 
 ### [0.3.0] - 2019-05-26
 

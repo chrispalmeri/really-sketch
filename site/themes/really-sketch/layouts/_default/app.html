@@ -4,14 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="Simple online graph paper with basic drafting tools. Easy to use. Create your own precision drawings, floor plans, and blueprints for free." />
+<meta name="description" content="{{ .Description }}" />
 <meta property="og:image" content="https://reallysketch.com/thumbnail.png" />
-<title>Really Sketch</title>
-<link rel="canonical" href="https://reallysketch.com/" />
-<link rel="alternate" hreflang="en" href="https://reallysketch.com/">
-<link rel="manifest" href="/manifest.json" />
-<link rel="icon" sizes="192x192" href="/icon-192.png" />
-<link rel="icon" sizes="16x16" href="/favicon.ico" />
+<meta property="og:image:width" content="332">
+<meta property="og:image:height" content="332">
+<title>{{ .Site.Title }}</title>
+<link rel="canonical" href="{{ .Page.Permalink }}" />
+<link rel="alternate" hreflang="en" href="{{ .Page.Permalink }}">
+<link rel="manifest" href="/app.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3c3d3f">
+<meta name="apple-mobile-web-app-title" content="Really Sketch">
+<meta name="application-name" content="Really Sketch">
+<meta name="theme-color" content="#84b0d2">
 {{ $js := resources.Get "js/bundle.js" | minify }}
 <script src="{{ $js.RelPermalink }}"></script>
 <link rel="stylesheet" href="/css/app.css" />
@@ -204,7 +211,7 @@
   <section id="about">
     <h3>About</h3>
     <h2 style="text-align: center; margin: 0">reallysketch.com</h2>
-    <p style="text-align: center;">version 0.3.1</p>
+    <p style="text-align: center;">version {{ .Params.version }}</p>
     <p>The inspiration was from an older <a target="_blank" href="http://tommaitland.net/2012/07/online-graph-paper-tool/">online graph paper</a>.
       If there is something that should be improved, <a id="dynamic" href="#">let me know</a>.
       Or, if you find this extremely useful and use it all the time, <a target="_blank" href="https://www.paypal.me/chrispalmeri">beer me</a>.</p>

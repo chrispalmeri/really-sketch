@@ -1,6 +1,6 @@
 {
   "name": "really-sketch",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
   "main": "app/js/bundle.js",
   "scripts": {
@@ -24,6 +24,6 @@
   "devDependencies": {
     "hugo-bin": "^0.43.6",
     "npm-run-all": "^4.1.5",
-    "rollup": "^1.12.3"
+    "rollup": "^1.32.1"
   }
 }

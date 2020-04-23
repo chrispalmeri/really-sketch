@@ -78,6 +78,7 @@ main div {
 }
 main aside {
   align-self: flex-start;
+  flex-basis: 50%;
 }
 footer {
   color: #aaa;
@@ -109,6 +110,7 @@ nav ul {
 }
 .hero {
   padding: 0 32px;
+  flex-basis: 50%;
 }
 .text {
   flex-basis: 100%;
