@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-date: 2017-09-04T21:30:00-05:00
+date: 2020-05-02T15:53:00-05:00
 menu: legal
 weight: 2
 ---
@@ -41,6 +41,6 @@ together. Having cookies disabled will not affect your use of this website.
 
 ### Policy Changes
 
-This Website is may revise this Policy at any time as it sees fit, and by using
+This Website may revise this Policy at any time as it sees fit, and by using
 this Website you are expected to review such Policy on a regular basis to ensure
 you are happy with any changes.
