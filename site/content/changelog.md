@@ -1,15 +1,17 @@
 ---
 title: "Changelog"
-date: 2020-04-22T19:08:00-05:00
-menu: about
-weight: 1
+date: 2020-05-02T15:53:00-05:00
+menu: learn
+weight: 2
 ---
 
 Changes to this project will be documented here.
 
-### [0.3.2] - unreleased
+### [0.3.2] - 2020-05-02
 
-  * add text
+  * Add tool to place text
+  * Add help button
+  * Add website footer links to documentation and analytics
 
 ### [0.3.1] - 2020-02-22
 
