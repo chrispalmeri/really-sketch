@@ -8,11 +8,21 @@ disableKinds = ["section", "taxonomy", "taxonomyTerm", "RSS"]
 
 [menu]
 
+  [[menu.learn]]
+    name = "Documentation"
+    url = "https://chrispalmeri.gitbook.io/really-sketch/"
+    weight = 1
+
+  [[menu.about]]
+    name = "Analytics"
+    url = "https://plausible.io/reallysketch.com"
+    weight = 1
+
   [[menu.about]]
     identifier = "dynamic"
     name = "Contact"
     url = "#"
-    weight = 3
+    weight = 2
 
   [[menu.contrib]]
     name = "GitHub"

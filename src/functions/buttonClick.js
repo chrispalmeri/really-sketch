@@ -1,5 +1,5 @@
 import tool from './../tool.js';
-import {Line, Arc, Eraser} from './../actions/index.js'
+import {Line, Arc, Text, Eraser} from './../actions/index.js'
 import drawing from './../drawing.js';
 
 window.addEventListener("load", function () {
@@ -18,6 +18,9 @@ export default function buttonClick(e) {
     },
     "arc-button": function () {
       tool.a = new Arc();
+    },
+    "text-button": function () {
+      tool.a = new Text();
     },
     "eraser-button": function () {
       tool.a = new Eraser();

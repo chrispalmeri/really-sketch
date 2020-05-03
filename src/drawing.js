@@ -109,6 +109,10 @@ export default new function() {
       } else if(obj.type === "arc") {
         canvas.f.arc(obj.x, obj.y, obj.r, obj.a, obj.b, true);
         canvas.f.stroke();
+      } else if(obj.type === "text") {
+        canvas.f.font = 'small-caps 18px "Routed Gothic"';
+        canvas.f.fillStyle = obj.colour;
+        canvas.f.fillText(obj.text, obj.x, obj.y - 1);
       } else if(obj.type === "eraser") {
         canvas.f.globalCompositeOperation = 'destination-out';
         canvas.f.arc(obj.x, obj.y - canvas.f.canvas.height, obj.r, 0, 2 * Math.PI, true);
@@ -123,6 +127,7 @@ export default new function() {
     });
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = "#D6D6D6";
+    canvas.f.fillStyle = "#FFA0A0";
   };
 
   this.import = function() {
@@ -160,14 +165,19 @@ export default new function() {
     var temp = new Object();
     temp.drawing = this.drawing;
     temp.drawing.name = name;
-    var json = encodeURIComponent(JSON.stringify(temp));
+    var json = JSON.stringify(temp);
 
-    var link = document.createElement("a");
-    link.setAttribute("href", "data:text/json;charset=utf-8," + json);
-    link.setAttribute("download", name + ".json");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (navigator.msSaveBlob) { // IE
+      navigator.msSaveBlob(new Blob([json], {type : 'application/json'}), name + ".json");
+    } else {
+
+      var link = document.createElement("a");
+      link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
+      link.setAttribute("download", name + ".json");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   this.save = function() {
@@ -177,11 +187,16 @@ export default new function() {
       name = "Drawing";
     }
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
-    var link = document.createElement("a");
-    link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-    link.setAttribute("download", name + ".png");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    if (navigator.msSaveBlob) { // IE 
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), name + ".png"); 
+    } else {
+      var link = document.createElement("a");
+      link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
+      link.setAttribute("download", name + ".png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 }

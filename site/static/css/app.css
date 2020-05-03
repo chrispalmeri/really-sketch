@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Routed Gothic";
+  src: url("/fonts/RoutedGothic.woff") format('woff');
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -60,18 +65,19 @@ a, button, select, input {
   outline: none;
 }
 select {
-  float: right;
-  width: 100px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   padding: 2px;
   border: 1px solid #8A8A8A;
   border-radius: 2px;
-  
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><polygon fill='%238A8A8A' points='1,2 5,9 9,2'></polygon></svg>");
   background-position: right 6px center;
   background-repeat: no-repeat;
+}
+#options select {
+  float: right;
+  width: 100px;
 }
 /* removed ", #about a" from next three rules */
 button, .actions a {
@@ -116,7 +122,14 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 .actions select {
   width: 68px;
   position: relative;
-  margin-bottom: 8px;
+}
+
+.actions input {
+  width: 60px;
+  position: relative;
+  padding: 3px 6px;
+  border: 1px solid #8A8A8A;
+  border-radius: 2px;
 }
 .dialog {
   position: absolute;
