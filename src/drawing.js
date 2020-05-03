@@ -165,14 +165,19 @@ export default new function() {
     var temp = new Object();
     temp.drawing = this.drawing;
     temp.drawing.name = name;
-    var json = encodeURIComponent(JSON.stringify(temp));
+    var json = JSON.stringify(temp);
 
-    var link = document.createElement("a");
-    link.setAttribute("href", "data:text/json;charset=utf-8," + json);
-    link.setAttribute("download", name + ".json");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (navigator.msSaveBlob) { // IE
+      navigator.msSaveBlob(new Blob([json], {type : 'application/json'}), name + ".json");
+    } else {
+
+      var link = document.createElement("a");
+      link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
+      link.setAttribute("download", name + ".json");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   this.save = function() {
@@ -182,11 +187,16 @@ export default new function() {
       name = "Drawing";
     }
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
-    var link = document.createElement("a");
-    link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-    link.setAttribute("download", name + ".png");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    if (navigator.msSaveBlob) { // IE 
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), name + ".png"); 
+    } else {
+      var link = document.createElement("a");
+      link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
+      link.setAttribute("download", name + ".png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 }
