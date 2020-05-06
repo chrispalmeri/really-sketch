@@ -42,7 +42,7 @@ export default function Text() {
     canvas.f.arc(snapped.x, snapped.y, 2.5, 0, 2 * Math.PI, true);
     canvas.f.fill();
 
-    canvas.f.font = 'small-caps 18px "Routed Gothic"';
+    canvas.f.font = '18px "Routed Gothic"';
     canvas.f.fillStyle = "#D6D6D6";
     canvas.f.fillText(this.coords.text, this.coords.x, this.coords.y - 1);
   };

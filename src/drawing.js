@@ -110,7 +110,7 @@ export default new function() {
         canvas.f.arc(obj.x, obj.y, obj.r, obj.a, obj.b, true);
         canvas.f.stroke();
       } else if(obj.type === "text") {
-        canvas.f.font = 'small-caps 18px "Routed Gothic"';
+        canvas.f.font = '18px "Routed Gothic"';
         canvas.f.fillStyle = obj.colour;
         canvas.f.fillText(obj.text, obj.x, obj.y - 1);
       } else if(obj.type === "eraser") {
