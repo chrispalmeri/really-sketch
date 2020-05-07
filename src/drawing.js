@@ -4,6 +4,8 @@ export default new function() {
   this.drawing = new Object();
   this.drawing.grid = 96 / 1;
   this.drawing.divisions = 8;
+  this.drawing.tooltip = 1;
+  this.drawing.fractions = 0;
   this.drawing.gridsnap = 1;
   this.drawing.lengthsnap = 1;
   this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
@@ -43,6 +45,8 @@ export default new function() {
     
     document.getElementById("grid").value = Math.round(96 * 100 / this.drawing.grid) / 100;
     document.getElementById("divisions").value = this.drawing.divisions;
+    document.getElementById("tooltip").value = this.drawing.tooltip;
+    document.getElementById("fractions").value = this.drawing.fractions;
     document.getElementById("gridsnap").value = this.drawing.gridsnap;
     document.getElementById("lengthsnap").value = this.drawing.lengthsnap;
     document.getElementById("anglesnap").value = this.drawing.anglesnap;

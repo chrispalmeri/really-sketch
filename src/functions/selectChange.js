@@ -23,6 +23,12 @@ export default function selectChange(e) {
       drawing.drawing.lensnap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.lengthsnap;
       drawing.refresh();
     },
+    "tooltip": function () {
+      drawing.drawing.tooltip = e.target.value;
+    },
+    "fractions": function () {
+      drawing.drawing.fractions = e.target.value;
+    },
     "gridsnap": function () {
       drawing.drawing.gridsnap = e.target.value;
       drawing.drawing.snap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.gridsnap;

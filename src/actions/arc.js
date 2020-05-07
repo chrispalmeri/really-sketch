@@ -5,6 +5,7 @@ import canvas from './../canvas.js';
 import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
+import convert from './../coords.js';
 
 export default function Arc() {
   help(interaction.text + " to set new arc center point");
@@ -67,7 +68,7 @@ export default function Arc() {
       if(d < 0) {
         d = d + 360;
       }
-      document.getElementById("coords").innerHTML = d + "&deg;";
+      document.getElementById("coords").innerHTML = convert(d + "&deg;");
     }
     canvas.f.beginPath();
     canvas.f.arc(snapped.x, snapped.y, 2.5, 0, 2 * Math.PI, true);

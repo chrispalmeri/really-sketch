@@ -1,5 +1,6 @@
 import drawing from './drawing.js';
 import mouse from './mouse.js';
+import convert from './coords.js';
 
 export default function snap(x, y, u, v) {
   var target = {x: x, y: y};
@@ -83,7 +84,7 @@ export default function snap(x, y, u, v) {
     
   }
   
-  document.getElementById("coords").innerHTML = coordX + ", " + coordY;
+  document.getElementById("coords").innerHTML = convert(coordX) + ", " + convert(coordY);
   document.getElementById("coords").style.display = "block";
   document.getElementById("coords").style.left = (mouse.x + 32) + "px";
   document.getElementById("coords").style.top = (mouse.y - 32) + "px";
