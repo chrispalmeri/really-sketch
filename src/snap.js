@@ -49,8 +49,8 @@ export default function snap(x, y, u, v) {
   
   snapped.x = grid.x;
   snapped.y = grid.y;
-  var coordX = Math.round(snapped.x * 1000 / drawing.drawing.grid) / 1000;
-  var coordY = Math.round(snapped.y * 1000 / drawing.drawing.grid) / 1000;
+  var coordX = snapped.x;
+  var coordY = snapped.y;
   
   
   if(origin.x !== undefined && origin.y !== undefined) {
@@ -58,28 +58,24 @@ export default function snap(x, y, u, v) {
     var a = Math.atan2((target.y - origin.y), (target.x - origin.x));
     
     if(drawing.drawing.anglesnap > 0) {
-      a = Math.round((a*180/Math.PI) / drawing.drawing.anglesnap) * drawing.drawing.anglesnap;
-    } else {
-      a = a*180/Math.PI;
+      a = Math.round((a * 180 / Math.PI) / drawing.drawing.anglesnap) * drawing.drawing.anglesnap;
+      a = a * Math.PI / 180;
     }
     var r = Math.sqrt(Math.pow(target.x - origin.x, 2) + Math.pow(target.y - origin.y, 2));
     r = Math.round(r / snap2) * snap2;
     
     //use new a and r to calculate xy from origin
-    angle.x = Math.cos(a*Math.PI/180) * r + origin.x;
-    angle.y = Math.sin(a*Math.PI/180) * r + origin.y;
+    angle.x = Math.cos(a) * r + origin.x;
+    angle.y = Math.sin(a) * r + origin.y;
     angle.d = Math.sqrt(Math.pow(target.x - angle.x, 2) + Math.pow(target.y - angle.y, 2));
 
     if(drawing.drawing.anglesnap > 0 || snap2 > 1) {
-    if(angle.d <= grid.d || (snapper == 1 && drawing.drawing.endsnap == 0)) {
-      snapped.x = angle.x;
-      snapped.y = angle.y;
-      coordX = Math.round(r * 1000 / drawing.drawing.grid) / 1000;
-      if(a > 0) {
-        a = a - 360;
+      if(angle.d <= grid.d || (snapper == 1 && drawing.drawing.endsnap == 0)) {
+        snapped.x = angle.x;
+        snapped.y = angle.y;
+        coordX = r;
+        coordY = a + " rad";
       }
-      coordY = Math.round(a * -1000) / 1000 + "&deg;";
-    }
     }
     
   }

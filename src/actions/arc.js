@@ -64,11 +64,7 @@ export default function Arc() {
       
       // left cause it is prettier than the output of snap function
       var d = this.coords.b - this.coords.a;
-      d = Math.round(d * -360 * 1000 / (2 * Math.PI)) / 1000;
-      if(d < 0) {
-        d = d + 360;
-      }
-      document.getElementById("coords").innerHTML = convert(d + "&deg;");
+      document.getElementById("coords").innerHTML = convert(d + " rad");
     }
     canvas.f.beginPath();
     canvas.f.arc(snapped.x, snapped.y, 2.5, 0, 2 * Math.PI, true);
