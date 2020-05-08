@@ -7,6 +7,20 @@ function cd(a, b) {
   return cd(b, a % b);
 }
 
+function toMinutes(n) {
+  let max = 60;
+
+  let temp = Math.round(n * max);
+  let string = Math.floor(temp / max) + '&deg;';
+  let minutes = temp % max;
+
+  if (minutes) {
+    string += '&nbsp;' + minutes + "&prime;";
+  }
+
+  return string;
+}
+
 function toFraction(n) {
   let max = 64;
 
@@ -16,7 +30,7 @@ function toFraction(n) {
 
   if (fraction) {
     let com = cd(max, fraction);
-    string += ' ' + fraction / com + '/' + max / com;
+    string += '&#8239;' + fraction / com + '&frasl;' + max / com;
   }
 
   return string;
@@ -45,26 +59,32 @@ export default function convert(n) {
   var output = '';
   var s = n;
 
-  if (drawing.drawing.tooltip == 2 && !degree) {
+  if (drawing.drawing.tooltip === "2" && !degree) {
     s = (n * drawing.drawing.divisions);
   }
-  if (drawing.drawing.tooltip == 3 && !degree) {
+  if (drawing.drawing.tooltip === "3" && !degree) {
     let p = Math.floor(n);
-    if(p) {
-      output += p + '-';
-    }
+    output += p + '&prime;&nbsp;';
     s = ((n % 1) * drawing.drawing.divisions);
   }
 
-  if (drawing.drawing.fractions == 1) {
-    s = toFraction(s);
+  if (drawing.drawing.fractions === "1") {
+    if(degree) {
+      s = toMinutes(s);
+    } else {
+      s = toFraction(s);
+    }
   } else {
     s = +s.toFixed(4);
   }
 
   output += s;
 
-  if(degree) {
+  if (drawing.drawing.tooltip === "3" && !degree) {
+    output += '&Prime;';
+  }
+
+  if(degree && output.search('&deg;') < 0) {
     output += '&deg;';
   }
 

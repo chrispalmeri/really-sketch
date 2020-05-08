@@ -4,8 +4,8 @@ export default new function() {
   this.drawing = new Object();
   this.drawing.grid = 96 / 1;
   this.drawing.divisions = 8;
-  this.drawing.tooltip = 1;
-  this.drawing.fractions = 0;
+  this.drawing.tooltip = "1";
+  this.drawing.fractions = "0";
   this.drawing.gridsnap = 1;
   this.drawing.lengthsnap = 1;
   this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
@@ -151,6 +151,12 @@ export default new function() {
         }
         if(this.drawing.name === undefined) {
           this.drawing.name = "Drawing";
+        }
+        if(this.drawing.tooltip === undefined) {
+          this.drawing.tooltip = "1";
+        }
+        if(this.drawing.fractions === undefined) {
+          this.drawing.fractions = "0";
         }
         document.getElementById("name").value = this.drawing.name;
         this.refresh();
