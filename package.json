@@ -1,6 +1,6 @@
 {
   "name": "really-sketch",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
   "main": "app/js/bundle.js",
   "scripts": {
