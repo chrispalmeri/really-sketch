@@ -1,11 +1,15 @@
 ---
 title: "Changelog"
-date: 2020-05-02T20:02:00-05:00
+date: 2020-05-08T17:14:00-05:00
 menu: learn
 weight: 2
 ---
 
 Changes to this project will be documented here.
+
+### [0.3.3] - 2020-05-08
+
+  * Add display options for tooltip measurements
 
 ### [0.3.2] - 2020-05-02
 
