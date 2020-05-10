@@ -1,4 +1,5 @@
 import drawing from './../drawing.js';
+import colors from './../colors.js';
 
 window.addEventListener("load", function () {
   var selects = document.getElementsByTagName("select");
@@ -11,6 +12,10 @@ function selectHandler(select) {
 
 export default function selectChange(e) {
   var youClicked = {
+    "theme": function () {
+      colors.theme(e.target.value);
+      drawing.refresh();
+    },
     "grid": function () {
       drawing.drawing.grid = 96 / e.target.value;
       drawing.drawing.snap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.gridsnap;

@@ -20,3 +20,11 @@ Clone the repo and then `npm install`.
 
 [Routed Gothic Font](https://github.com/dse/routed-gothic)
 [Colors](https://clrs.cc/)
+
+## To Do
+
+* need to change css for the ui also
+* theme doesn't persist anywhere
+* also doesn't sync the dropdown on page refresh
+* menu placement might not be the best
+* do you need dark and blueprint?
