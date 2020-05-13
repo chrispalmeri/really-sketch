@@ -12,7 +12,8 @@ function selectHandler(select) {
 
 export default function selectChange(e) {
   var youClicked = {
-    "theme": function () {
+    "color-theme": function () {
+      document.body.className = e.target.value;
       colors.theme(e.target.value);
       drawing.refresh();
     },
@@ -53,10 +54,10 @@ export default function selectChange(e) {
       drawing.refresh();
     },
     "line_colour": function() {
-
+      // this is just here to not throw an error for undefined function
     },
     "line_width": function() {
-
+      // ditto
     }
   }
   youClicked[e.target.id]();

@@ -24,8 +24,9 @@ Clone the repo and then `npm install`.
 
 ## To Do
 
-* need to change css for the ui also
-* theme doesn't persist anywhere
+* how does light grid show up on crappy screens?
+* get rid of either classic or light
+  * in app.html and colors.js
+  * css is gtg
+* theme doesn't persist anywhere (need local storage and refactor drawing)
 * also doesn't sync the dropdown on page refresh
-* menu placement might not be the best
-* do you need dark and blueprint?

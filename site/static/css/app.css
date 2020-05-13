@@ -3,6 +3,37 @@
   src: url("/fonts/RoutedGothic.woff") format('woff');
 }
 
+:root {
+  --help: #fffbe3; /* and coords */
+  --border: #8a8a8a; /* and close button */
+  --button: #d6d6d6; /* and dialog header */
+  --hover: #bdbdbd; /* and focus */
+  --text: #000000; /* and close button */
+  --background: #ffffff; /* mainly dialog tabs */
+  --sidebar: #eeeeee; /* and keyboard shortcuts */
+  --accent: #ffa0a0; /* just for tab highlight */
+  --link: #5f94c8; /* just for about section */
+}
+body.dark, body.blue {
+  --help: #272727; /* #2e2d00 */
+  --border: #747474;
+  --button: #3d3d3d;
+  --hover: #505050;
+  --text: #ffffff;
+  --background: #121212;
+  --sidebar: #272727;
+  --accent: #a13131;
+  --link: #52789e;
+}
+
+
+body, input, select {
+  color: #000000;
+  color: var(--text);
+  background-color: #ffffff;
+  background-color: var(--background);
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -25,8 +56,10 @@ footer {
 #help, #coords {
   display: inline-block;
   background: #FFFBE3;
+  background: var(--help);
   padding: 1px 8px;
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -70,6 +103,7 @@ select {
   appearance: none;
   padding: 2px;
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><polygon fill='%238A8A8A' points='1,2 5,9 9,2'></polygon></svg>");
   background-position: right 6px center;
@@ -81,18 +115,24 @@ select {
 }
 /* removed ", #about a" from next three rules */
 button, .actions a {
+  color: #000000;
+  color: var(--text);
   cursor: pointer;
   font: 14px sans-serif;
   display: block;
   background: #D6D6D6;
+  background: var(--button);
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
 }
 button:hover, .actions a:hover {
   background: #BDBDBD;
+  background: var(--hover);
 }
 button:focus, .actions a:focus {
   background: #BDBDBD;
+  background: var(--hover);
 }
 button::-moz-focus-inner, select::-moz-focus-inner {
   padding: 0;
@@ -115,6 +155,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   width: 64px;
   position: relative;
   color: #000;
+  color: var(--text);
   text-decoration: none;
   text-align: center;
   padding: 4px;
@@ -129,6 +170,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   position: relative;
   padding: 3px 6px;
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
 }
 .dialog {
@@ -150,7 +192,9 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   transform: translate(0, -50%);
   max-width: 440px;
   background: #fff;
+  background: var(--background);
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   margin: auto;
@@ -159,7 +203,9 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   width: 100%;
   float: left;
   background: #D6D6D6;
+  background: var(--button);
   border-bottom: 1px solid #8A8A8A;
+  border-bottom: 1px solid var(--border);
   border-radius: 3px 3px 0 0;
 }
 .dialog header h2 {
@@ -177,14 +223,20 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   border: none;
   background: transparent;
 }
+#options-close {
+  fill: #8a8a8a;
+  fill: var(--border);
+}
 .dialog header button:hover svg polygon, .dialog header button:focus svg polygon {
   fill: #000;
+  fill: var(--text);
 }
 .dialog aside {
-  height: 248px; /* 334 - header */
+  height: 258px; /*248px;*/ /* 334 - header */
   width: 30%;
   float: left;
   background: #EEEEEE;
+  background: var(--sidebar);
   border-radius: 0 0 0 3px;
 }
 .dialog aside ul {
@@ -192,6 +244,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 }
 .dialog aside a {
   color: #000;
+  color: var(--text);
   text-decoration: none;
   display: block;
   padding: 8px;
@@ -200,12 +253,16 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 }
 .dialog aside a:hover, .dialog aside a:focus  {
   background: #fff;
+  background: var(--background);
   border-left: 4px solid #fff;
+  border-left: 4px solid var(--background);
   margin-left: 0;
 }
 .dialog aside a.active  {
   background: #fff;
+  background: var(--background);
   border-left: 4px solid #FFA0A0;
+  border-left: 4px solid var(--accent);
   margin-left: 0;
 }
 .dialog section {
@@ -226,6 +283,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   float: right;
   padding: 3px 6px;
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
 }
 /* removed ", #about a" from following rule */
@@ -243,6 +301,7 @@ input:disabled {
 } */
 #about a {
   color: #5F94C8;
+  color: var(--link);
 }
 
 #shortcuts ul {
@@ -260,11 +319,19 @@ input:disabled {
   font: normal 12px sans-serif;
   padding: 3px 4px 2px;
   background: #eee;
+  background: var(--sidebar);
   border: 1px solid #8A8A8A;
+  border: 1px solid var(--border);
   border-radius: 2px;
   margin-left: 8px;
 }
 
-#color-button, #interface-link, #theme-link {
+#color-button, #interface-link {
   display: none;
+}
+
+/* theme items that couldn't use vars */
+
+.dark select, .blue select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><polygon fill='%23747474' points='1,2 5,9 9,2'></polygon></svg>");
 }
