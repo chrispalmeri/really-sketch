@@ -52,6 +52,7 @@ export default new function() {
     document.getElementById("lengthsnap").value = this.drawing.lengthsnap;
     document.getElementById("anglesnap").value = this.drawing.anglesnap;
     document.getElementById("endsnap").value = this.drawing.endsnap;
+    document.getElementById("color-theme").value = colors.name;
     
     var v, h;
     canvas.bg.beginPath();

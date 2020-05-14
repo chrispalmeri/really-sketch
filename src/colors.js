@@ -1,7 +1,7 @@
 // colors.js
 
 export default {
-  // make these values the 'Classic' theme
+  name: 'light',
   background: '#ffffff',
   primary: '#bedbf8',
   secondary: '#e3f1fe',
@@ -10,14 +10,8 @@ export default {
   default: '#333333',
 
   theme: function(t) {
-    if(t === 'light') {
-      this.background = '#ffffff';
-      this.primary = '#d7dee4';
-      this.secondary = '#ebeef1';
-      this.cursor = '#ffa0a0';
-      this.preview = '#d6d6d6';
-      this.default = '#333333';
-    } else if(t === 'dark') {
+    if(t === 'dark') {
+      this.name = 'dark';
       this.background = '#121212';
       this.primary = '#373737';
       this.secondary = '#242424';
@@ -25,6 +19,7 @@ export default {
       this.preview = '#3d3d3d';
       this.default = '#f3f3f3';
     } else if(t === 'blue') {
+      this.name = 'blue';
       this.background = '#003153';
       this.primary = '#28516d';
       this.secondary = '#144160';
@@ -32,9 +27,10 @@ export default {
       this.preview = '#3d3d3d';
       this.default = '#f3f3f3';
     } else {
+      this.name = 'light';
       this.background = '#ffffff';
-      this.primary = '#bedbf8';
-      this.secondary = '#e3f1fe';
+      this.primary = '#bedbf8'; // #d7dee4 was discarded new light theme
+      this.secondary = '#e3f1fe'; // #ebeef1 was discarded new light theme
       this.cursor = '#ffa0a0';
       this.preview = '#d6d6d6';
       this.default = '#333333';

@@ -24,9 +24,4 @@ Clone the repo and then `npm install`.
 
 ## To Do
 
-* how does light grid show up on crappy screens?
-* get rid of either classic or light
-  * in app.html and colors.js
-  * css is gtg
-* theme doesn't persist anywhere (need local storage and refactor drawing)
-* also doesn't sync the dropdown on page refresh
+* theme doesn't persist anywhere (need local storage)
