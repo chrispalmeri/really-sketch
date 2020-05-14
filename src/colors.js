@@ -1,6 +1,12 @@
 // colors.js
 
-export default {
+import storage from './storage.js';
+
+window.addEventListener("load", function () {
+  document.body.className = exp.name;
+});
+
+var exp = {
   name: 'light',
   background: '#ffffff',
   primary: '#bedbf8',
@@ -35,5 +41,14 @@ export default {
       this.preview = '#d6d6d6';
       this.default = '#333333';
     }
+
+    storage.set('theme', this.name);
   }
 }
+
+var current = storage.get('theme');
+if(current) {
+  exp.theme(current);
+}
+
+export default exp;

@@ -21,7 +21,3 @@ Clone the repo and then `npm install`.
 [Routed Gothic Font](https://github.com/dse/routed-gothic)
 
 [Colors](https://clrs.cc/)
-
-## To Do
-
-* theme doesn't persist anywhere (need local storage)
