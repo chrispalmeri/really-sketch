@@ -92,8 +92,8 @@ export default new function() {
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.default;
     this.drawing.objects.forEach(function(obj) {
-      if (obj.colour) {
-        canvas.f.strokeStyle = obj.colour;
+      if (obj.color) {
+        canvas.f.strokeStyle = obj.color;
       } else {
         canvas.f.strokeStyle = colors.default;
       }
@@ -117,7 +117,7 @@ export default new function() {
         canvas.f.stroke();
       } else if(obj.type === "text") {
         canvas.f.font = '18px "Routed Gothic"';
-        canvas.f.fillStyle = obj.colour || colors.default;
+        canvas.f.fillStyle = obj.color || colors.default;
         canvas.f.fillText(obj.text, obj.x, obj.y - 1);
       } else if(obj.type === "eraser") {
         canvas.f.globalCompositeOperation = 'destination-out';
@@ -146,6 +146,7 @@ export default new function() {
       reader.onload = function (e) {
         var temp = JSON.parse(e.target.result);
         this.drawing = temp.drawing;
+
         // for previous version saves
         if(this.drawing.lengthsnap === undefined) {
           this.drawing.lengthsnap = 1;
@@ -160,6 +161,26 @@ export default new function() {
         if(this.drawing.fractions === undefined) {
           this.drawing.fractions = "0";
         }
+
+        // replace old colors with new here
+        var colorMap = {
+          Red: '#FF4136',
+          Orange: '#FF851B',
+          Yellow: '#FFDC00',
+          Green: '#2ECC40',
+          Blue: '#0074D9',
+          Purple: '#B10DC9',
+        };
+
+        this.drawing.objects.forEach(function(obj) {
+          if (obj.colour) {
+            if(colorMap[obj.colour]) {
+              obj.color = colorMap[obj.colour];
+            }
+            delete obj.colour;
+          }
+        });
+
         document.getElementById("name").value = this.drawing.name;
         this.refresh();
       }.bind(this);

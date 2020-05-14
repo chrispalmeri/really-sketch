@@ -51,7 +51,10 @@ export default function Line() {
   };
 
   this.save = function() {
-    this.coords.colour = document.getElementById('line_colour').value;
+    var selectedColor = document.getElementById('line_color').value;
+    if (selectedColor) {
+      this.coords.color = selectedColor;
+    }
     this.coords.width = document.getElementById('line_width').value;
     drawing.drawing.objects.push(this.coords);
     drawing.drawing.points.push([this.coords.x, this.coords.y]);

@@ -49,7 +49,10 @@ export default function Text() {
   };
 
   this.save = function() {
-    this.coords.colour = document.getElementById('line_colour').value;
+    var selectedColor = document.getElementById('line_color').value;
+    if (selectedColor) {
+      this.coords.color = selectedColor;
+    }
     drawing.drawing.objects.push(this.coords);
     mouse.hide();
   };

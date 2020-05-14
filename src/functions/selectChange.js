@@ -53,7 +53,7 @@ export default function selectChange(e) {
       drawing.drawing.endsnap = e.target.value;
       drawing.refresh();
     },
-    "line_colour": function() {
+    "line_color": function() {
       // this is just here to not throw an error for undefined function
     },
     "line_width": function() {
