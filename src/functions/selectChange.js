@@ -13,7 +13,6 @@ function selectHandler(select) {
 export default function selectChange(e) {
   var youClicked = {
     "color-theme": function () {
-      document.body.className = e.target.value;
       colors.theme(e.target.value);
       drawing.refresh();
     },

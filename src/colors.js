@@ -3,7 +3,11 @@
 import storage from './storage.js';
 
 window.addEventListener("load", function () {
-  document.body.className = exp.name;
+  var current = storage.get('theme');
+  if(current) {
+    exp.theme(current);
+    document.getElementById("color-theme").value = current;
+  }
 });
 
 var exp = {
@@ -42,13 +46,9 @@ var exp = {
       this.default = '#333333';
     }
 
+    document.body.className = exp.name;
     storage.set('theme', this.name);
   }
-}
-
-var current = storage.get('theme');
-if(current) {
-  exp.theme(current);
 }
 
 export default exp;

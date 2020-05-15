@@ -52,7 +52,6 @@ export default new function() {
     document.getElementById("lengthsnap").value = this.drawing.lengthsnap;
     document.getElementById("anglesnap").value = this.drawing.anglesnap;
     document.getElementById("endsnap").value = this.drawing.endsnap;
-    document.getElementById("color-theme").value = colors.name;
     
     var v, h;
     canvas.bg.beginPath();
@@ -164,12 +163,12 @@ export default new function() {
 
         // replace old colors with new here
         var colorMap = {
-          Red: '#FF4136',
-          Orange: '#FF851B',
-          Yellow: '#FFDC00',
-          Green: '#2ECC40',
-          Blue: '#0074D9',
-          Purple: '#B10DC9',
+          Red: '#ff4136',
+          Orange: '#ff851b',
+          Yellow: '#ffdc00',
+          Green: '#2ecc40',
+          Blue: '#0074d9',
+          Purple: '#b10dc9',
         };
 
         this.drawing.objects.forEach(function(obj) {
