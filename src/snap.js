@@ -1,3 +1,5 @@
+// snap.js
+
 import drawing from './drawing.js';
 import mouse from './mouse.js';
 import convert from './coords.js';

@@ -1,3 +1,5 @@
+// actions/text.js
+
 import help from './../help.js';
 import interaction from './../interaction.js';
 import snap from './../snap.js';

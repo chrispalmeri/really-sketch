@@ -1,3 +1,5 @@
+// functions/buttonClick.js
+
 import tool from './../tool.js';
 import { Line, Arc, Text, Eraser } from './../actions/index.js';
 import drawing from './../drawing.js';

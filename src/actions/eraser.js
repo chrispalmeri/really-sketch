@@ -1,3 +1,5 @@
+// actions/eraser.js
+
 import help from './../help.js';
 import interaction from './../interaction.js';
 import canvas from './../canvas.js';

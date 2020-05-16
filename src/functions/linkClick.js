@@ -1,3 +1,5 @@
+// functions/linkClick.js
+
 window.addEventListener("load", function() {
   var links = document.getElementsByTagName("a");
   Array.prototype.forEach.call(links, linkHandler);

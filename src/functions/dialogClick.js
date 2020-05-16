@@ -1,3 +1,5 @@
+// functions/dialogClick.js
+
 window.addEventListener("load", function() {
   var dialogs = document.getElementsByClassName("dialog");
   Array.prototype.forEach.call(dialogs, dialogHandler);

@@ -1,3 +1,5 @@
+// coords.js
+
 import drawing from './drawing.js';
 
 function cd(a, b) {
