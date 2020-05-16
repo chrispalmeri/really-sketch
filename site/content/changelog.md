@@ -1,11 +1,16 @@
 ---
 title: "Changelog"
-date: 2020-05-08T17:14:00-05:00
+date: 2020-05-15T18:47:00-05:00
 menu: learn
 weight: 2
 ---
 
 Changes to this project will be documented here.
+
+### [0.3.4] - 2020-05-15
+
+  * Add option for color theme with blueprint and dark mode
+  * Change line colors to better shades
 
 ### [0.3.3] - 2020-05-08
 

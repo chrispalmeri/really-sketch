@@ -5,6 +5,7 @@ import canvas from './../canvas.js';
 import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
+import colors from './../colors.js';
 
 window.addEventListener("load", function () {
   document.getElementById("text-input").addEventListener("keyup", function() {
@@ -43,12 +44,15 @@ export default function Text() {
     canvas.f.fill();
 
     canvas.f.font = '18px "Routed Gothic"';
-    canvas.f.fillStyle = "#D6D6D6";
+    canvas.f.fillStyle = colors.preview;
     canvas.f.fillText(this.coords.text, this.coords.x, this.coords.y - 1);
   };
 
   this.save = function() {
-    this.coords.colour = document.getElementById('line_colour').value;
+    var selectedColor = document.getElementById('line_color').value;
+    if (selectedColor) {
+      this.coords.color = selectedColor;
+    }
     drawing.drawing.objects.push(this.coords);
     mouse.hide();
   };

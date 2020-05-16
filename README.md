@@ -19,3 +19,5 @@ Clone the repo and then `npm install`.
 ## Kudos
 
 [Routed Gothic Font](https://github.com/dse/routed-gothic)
+
+[Colors](https://clrs.cc/)

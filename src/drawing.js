@@ -1,4 +1,5 @@
 import canvas from './canvas.js';
+import colors from './colors.js';
 
 export default new function() {
   this.drawing = new Object();
@@ -34,9 +35,9 @@ export default new function() {
     canvas.bg.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
     canvas.bg.translate(0.5, 0.5);
     canvas.f.clearRect(0, 0, canvas.f.canvas.width, canvas.f.canvas.height);
-    canvas.bg.fillStyle = "#fff";
+    canvas.bg.fillStyle = colors.background;
     canvas.bg.fillRect(-1, -1, canvas.bg.canvas.width + 1, canvas.bg.canvas.height + 1);
-    canvas.f.fillStyle = "#FFA0A0";
+    canvas.f.fillStyle = colors.cursor;
     canvas.f.lineCap = "square";
     
     if(this.drawing.grid === 0 || this.drawing.divisions === 0) {
@@ -67,7 +68,7 @@ export default new function() {
       h = h + (this.drawing.grid / this.drawing.divisions);
     }
     canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = "#E3F1FE";
+    canvas.bg.strokeStyle = colors.secondary;
     canvas.bg.stroke();
     
     canvas.bg.beginPath();
@@ -84,16 +85,16 @@ export default new function() {
       h = h + this.drawing.grid;
     }
     canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = "#BEDBF8";
+    canvas.bg.strokeStyle = colors.primary;
     canvas.bg.stroke();
     
     canvas.f.lineWidth = 2;
-    canvas.f.strokeStyle = "#333";
+    canvas.f.strokeStyle = colors.default;
     this.drawing.objects.forEach(function(obj) {
-      if (obj.colour) {
-        canvas.f.strokeStyle = obj.colour;
+      if (obj.color) {
+        canvas.f.strokeStyle = obj.color;
       } else {
-        canvas.f.strokeStyle = "#333";
+        canvas.f.strokeStyle = colors.default;
       }
       if (obj.width) {
         canvas.f.lineWidth = obj.width;
@@ -115,7 +116,7 @@ export default new function() {
         canvas.f.stroke();
       } else if(obj.type === "text") {
         canvas.f.font = '18px "Routed Gothic"';
-        canvas.f.fillStyle = obj.colour;
+        canvas.f.fillStyle = obj.color || colors.default;
         canvas.f.fillText(obj.text, obj.x, obj.y - 1);
       } else if(obj.type === "eraser") {
         canvas.f.globalCompositeOperation = 'destination-out';
@@ -130,8 +131,8 @@ export default new function() {
       }
     });
     canvas.f.lineWidth = 2;
-    canvas.f.strokeStyle = "#D6D6D6";
-    canvas.f.fillStyle = "#FFA0A0";
+    canvas.f.strokeStyle = colors.preview;
+    canvas.f.fillStyle = colors.cursor;
   };
 
   this.import = function() {
@@ -144,6 +145,7 @@ export default new function() {
       reader.onload = function (e) {
         var temp = JSON.parse(e.target.result);
         this.drawing = temp.drawing;
+
         // for previous version saves
         if(this.drawing.lengthsnap === undefined) {
           this.drawing.lengthsnap = 1;
@@ -158,6 +160,26 @@ export default new function() {
         if(this.drawing.fractions === undefined) {
           this.drawing.fractions = "0";
         }
+
+        // replace old colors with new here
+        var colorMap = {
+          Red: '#ff4136',
+          Orange: '#ff851b',
+          Yellow: '#ffdc00',
+          Green: '#2ecc40',
+          Blue: '#0074d9',
+          Purple: '#b10dc9',
+        };
+
+        this.drawing.objects.forEach(function(obj) {
+          if (obj.colour) {
+            if(colorMap[obj.colour]) {
+              obj.color = colorMap[obj.colour];
+            }
+            delete obj.colour;
+          }
+        });
+
         document.getElementById("name").value = this.drawing.name;
         this.refresh();
       }.bind(this);
