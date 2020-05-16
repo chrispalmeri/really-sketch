@@ -58,6 +58,6 @@ export default function selectChange(e) {
     "line_width": function() {
       // ditto
     }
-  }
+  };
   youClicked[e.target.id]();
 }

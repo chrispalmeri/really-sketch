@@ -5,11 +5,13 @@
   "main": "app/js/bundle.js",
   "scripts": {
     "serve": "npm-run-all -p serve:*",
-    "serve:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs -w",
+    "serve:rollup": "rollup -c -w",
     "serve:hugo": "hugo server -ws site",
     "build": "npm-run-all -s build:*",
-    "build:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs",
-    "build:hugo": "hugo -s site -d ../dist"
+    "build:rollup": "rollup -c",
+    "build:hugo": "hugo -s site -d ../dist",
+    "lint": "jshint src/",
+    "clean": "js-beautify -r src/*"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,8 @@
   "homepage": "https://github.com/chrispalmeri/really-sketch#readme",
   "devDependencies": {
     "hugo-bin": "^0.43.6",
+    "js-beautify": "^1.11.0",
+    "jshint": "^2.11.1",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.32.1"
   }

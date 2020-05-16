@@ -1,3 +1,5 @@
+// index.js
+
 import drawing from './drawing.js';
 import tool from './tool.js';
 import mouse from './mouse.js';
@@ -8,7 +10,7 @@ import dialogClick from './functions/dialogClick.js';
 import linkClick from './functions/linkClick.js';
 import selectChange from './functions/selectChange.js';
 
-import Line from './actions/line.js'
+import Line from './actions/line.js';
 
 window.addEventListener("load", function () {
   if('serviceWorker' in navigator) {

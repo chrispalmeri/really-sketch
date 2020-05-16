@@ -1,5 +1,5 @@
 import tool from './../tool.js';
-import {Line, Arc, Text, Eraser} from './../actions/index.js'
+import {Line, Arc, Text, Eraser} from './../actions/index.js';
 import drawing from './../drawing.js';
 
 window.addEventListener("load", function () {
@@ -59,6 +59,6 @@ export default function buttonClick(e) {
     "import": function () {
       drawing.import();
     }
-  }
+  };
   youClicked[e.currentTarget.id]();
 }

@@ -1,33 +1,37 @@
+// drawing.js
+
 import canvas from './canvas.js';
 import colors from './colors.js';
 
-export default new function() {
-  this.drawing = new Object();
-  this.drawing.grid = 96 / 1;
-  this.drawing.divisions = 8;
-  this.drawing.tooltip = "1";
-  this.drawing.fractions = "0";
-  this.drawing.gridsnap = 1;
-  this.drawing.lengthsnap = 1;
-  this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
-  this.drawing.anglesnap = 15;
-  this.drawing.snap = this.drawing.grid / this.drawing.divisions * this.drawing.gridsnap;
-  this.drawing.endsnap = 1;
+class Drawing {
+  constructor() {
+    this.drawing = {};
+    this.drawing.grid = 96 / 1;
+    this.drawing.divisions = 8;
+    this.drawing.tooltip = "1";
+    this.drawing.fractions = "0";
+    this.drawing.gridsnap = 1;
+    this.drawing.lengthsnap = 1;
+    this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
+    this.drawing.anglesnap = 15;
+    this.drawing.snap = this.drawing.grid / this.drawing.divisions * this.drawing.gridsnap;
+    this.drawing.endsnap = 1;
 
-  this.drawing.points = [];
-  this.drawing.objects = [];
+    this.drawing.points = [];
+    this.drawing.objects = [];
+  }
 
-  this.undo = function() {
+  undo() {
     this.drawing.objects.splice(-1,1);
     this.refresh();
-  };
+  }
 
-  this.clear = function() {
+  clear() {
     this.drawing.objects.length = 0;
     this.refresh();
-  };
+  }
 
-  this.refresh = function() {
+  refresh() {
     canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
     canvas.f.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
     canvas.f.translate(0.5, 0.5);
@@ -133,16 +137,16 @@ export default new function() {
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.preview;
     canvas.f.fillStyle = colors.cursor;
-  };
+  }
 
-  this.import = function() {
+  import() {
     var upload = document.createElement("input");
     upload.setAttribute("type", "file");
-    upload.onchange = function(e) {
+    upload.onchange = (e) => {
       var reader = new FileReader();
       var file = e.target.files[0];
       reader.readAsText(file, "utf-8");
-      reader.onload = function (e) {
+      reader.onload = (e) => {
         var temp = JSON.parse(e.target.result);
         this.drawing = temp.drawing;
 
@@ -182,19 +186,19 @@ export default new function() {
 
         document.getElementById("name").value = this.drawing.name;
         this.refresh();
-      }.bind(this);
-    }.bind(this);
+      };
+    };
     upload.click();
-  };
+  }
 
-  this.export = function() {
+  export() {
     var name = document.getElementById("name").value;
     name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
     if(name === "") {
       name = "Drawing";
     }
     
-    var temp = new Object();
+    var temp = {};
     temp.drawing = this.drawing;
     temp.drawing.name = name;
     var json = JSON.stringify(temp);
@@ -210,9 +214,9 @@ export default new function() {
       link.click();
       document.body.removeChild(link);
     }
-  };
+  }
 
-  this.save = function() {
+  save() {
     var name = document.getElementById("name").value;
     name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
     if(name === "") {
@@ -230,5 +234,7 @@ export default new function() {
       link.click();
       document.body.removeChild(link);
     }
-  };
+  }
 }
+
+export default new Drawing();

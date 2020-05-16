@@ -49,6 +49,6 @@ var exp = {
     document.body.className = exp.name;
     storage.set('theme', this.name);
   }
-}
+};
 
 export default exp;

@@ -1,3 +1,5 @@
-export default new function() {
-  this.a = ''
+// tool.js
+
+export default {
+  a: ''
 };
