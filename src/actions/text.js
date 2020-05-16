@@ -7,7 +7,7 @@ import mouse from './../mouse.js';
 import tool from './../tool.js';
 import colors from './../colors.js';
 
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   document.getElementById("text-input").addEventListener("keyup", function() {
     tool.a = new Text();
   });
@@ -22,7 +22,7 @@ export default function Text() {
   this.coords.text = document.getElementById("text-input").value;
 
   this.click = function(x, y) {
-    if(this.coords.text !== '') {
+    if (this.coords.text !== '') {
       this.save();
       this.reset();
     }

@@ -11,7 +11,7 @@
     "build:rollup": "rollup -c",
     "build:hugo": "hugo -s site -d ../dist",
     "lint": "jshint src/",
-    "clean": "js-beautify -r src/*"
+    "clean": "js-beautify -r src/*/*.js src/*.js"
   },
   "repository": {
     "type": "git",

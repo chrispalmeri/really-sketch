@@ -1,4 +1,4 @@
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   var dialogs = document.getElementsByClassName("dialog");
   Array.prototype.forEach.call(dialogs, dialogHandler);
 });
@@ -8,7 +8,7 @@ function dialogHandler(dialog) {
 }
 
 export default function dialogClick(e) {
-  if(e.target.className === "dialog") {
+  if (e.target.className === "dialog") {
     e.target.style.display = "none";
   }
 }

@@ -1,8 +1,8 @@
 import tool from './../tool.js';
-import {Line, Arc, Text, Eraser} from './../actions/index.js';
+import { Line, Arc, Text, Eraser } from './../actions/index.js';
 import drawing from './../drawing.js';
 
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   var buttons = document.getElementsByTagName("button");
   Array.prototype.forEach.call(buttons, buttonHandler);
 });
@@ -13,50 +13,50 @@ function buttonHandler(button) {
 
 export default function buttonClick(e) {
   var youClicked = {
-    "line-button": function () {
+    "line-button": function() {
       tool.a = new Line();
     },
-    "arc-button": function () {
+    "arc-button": function() {
       tool.a = new Arc();
     },
-    "text-button": function () {
+    "text-button": function() {
       tool.a = new Text();
     },
-    "eraser-button": function () {
+    "eraser-button": function() {
       tool.a = new Eraser();
     },
-    "undo-button": function () {
+    "undo-button": function() {
       drawing.undo();
     },
-    "options-button": function () {
+    "options-button": function() {
       document.getElementById("options").style.display = "block";
     },
-    "options-close": function () {
+    "options-close": function() {
       document.getElementById("options").style.display = "none";
     },
-    "info": function () {
+    "info": function() {
       // var dpi = "<table><tr><td width=\"60%\">Window Width:</td><td>" + document.body.clientWidth;
       // dpi += "</td></tr><tr><td>Device Pixel Ratio:</td><td>" + window.devicePixelRatio;
       // dpi += "</td></tr><tr><td>Touch Screen:</td><td>" + interaction.touch;
       // dpi += "</td></tr></table>";
       // document.getElementById("dpi").innerHTML = dpi;
-  
+
       document.getElementById("drawingOptions").style.display = 'none';
       document.getElementById("appInfo").style.display = 'block';
     },
-    "ok": function () {
+    "ok": function() {
       document.getElementById("appInfo").style.display = 'none';
     },
-    "clear": function () {
+    "clear": function() {
       drawing.clear();
     },
-    "save": function () {
+    "save": function() {
       drawing.save();
     },
-    "export": function () {
-      drawing.export();
+    "export": function() {
+      drawing.xport();
     },
-    "import": function () {
+    "import": function() {
       drawing.import();
     }
   };

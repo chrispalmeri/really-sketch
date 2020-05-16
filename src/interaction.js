@@ -6,7 +6,7 @@ var inter = {
 };
 
 window.addEventListener("load", function() {
-  if('ontouchstart' in window) {
+  if ('ontouchstart' in window) {
     inter.touch = "Yes";
     inter.text = "Drag";
   } else {

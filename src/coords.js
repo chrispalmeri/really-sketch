@@ -39,19 +39,19 @@ function toFraction(n) {
 export default function convert(n) {
   var degree = false;
 
-  if(typeof n === 'string') {
-    if(n.search(' rad') > -1) {
+  if (typeof n === 'string') {
+    if (n.search(' rad') > -1) {
       degree = true;
       n.replace(' rad', '');
     }
     n = parseFloat(n);
   }
 
-  if(!degree) {
+  if (!degree) {
     n = n / drawing.drawing.grid;
   } else {
     n = n * -180 / Math.PI;
-    if(n < 0) {
+    if (n < 0) {
       n = n + 360;
     }
   }
@@ -69,7 +69,7 @@ export default function convert(n) {
   }
 
   if (drawing.drawing.fractions === "1") {
-    if(degree) {
+    if (degree) {
       s = toMinutes(s);
     } else {
       s = toFraction(s);
@@ -84,7 +84,7 @@ export default function convert(n) {
     output += '&Prime;';
   }
 
-  if(degree && output.search('&deg;') < 0) {
+  if (degree && output.search('&deg;') < 0) {
     output += '&deg;';
   }
 

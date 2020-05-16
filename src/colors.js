@@ -2,9 +2,9 @@
 
 import storage from './storage.js';
 
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   var current = storage.get('theme');
-  if(current) {
+  if (current) {
     exp.theme(current);
     document.getElementById("color-theme").value = current;
   }
@@ -20,7 +20,7 @@ var exp = {
   default: '#333333',
 
   theme: function(t) {
-    if(t === 'dark') {
+    if (t === 'dark') {
       this.name = 'dark';
       this.background = '#121212';
       this.primary = '#373737';
@@ -28,7 +28,7 @@ var exp = {
       this.cursor = '#a13131';
       this.preview = '#3d3d3d';
       this.default = '#f3f3f3';
-    } else if(t === 'blue') {
+    } else if (t === 'blue') {
       this.name = 'blue';
       this.background = '#003153';
       this.primary = '#28516d';

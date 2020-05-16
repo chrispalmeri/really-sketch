@@ -24,10 +24,10 @@ export default function Eraser() {
   };
 
   this.move = function(x, y) {
-    if(this.points === 0) {
+    if (this.points === 0) {
       this.coords.x = x;
       this.coords.y = y;
-      if(drawing.drawing.snap === 0) {
+      if (drawing.drawing.snap === 0) {
         this.coords.r = 16;
       } else {
         this.coords.r = drawing.drawing.snap - 1;

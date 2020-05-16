@@ -22,8 +22,7 @@ class Mouse {
     if (e.touches) {
       this.x = e.changedTouches[0].pageX;
       this.y = e.changedTouches[0].pageY - 48;
-    }
-    else {
+    } else {
       this.x = e.clientX;
       this.y = e.clientY;
     }
@@ -35,8 +34,7 @@ class Mouse {
       this.x = e.touches[0].clientX;
       this.y = e.touches[0].clientY - 48;
       e.preventDefault();
-    }
-    else {
+    } else {
       this.x = e.clientX;
       this.y = e.clientY;
     }
