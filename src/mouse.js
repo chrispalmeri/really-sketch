@@ -26,7 +26,7 @@ class Mouse {
       this.x = e.clientX;
       this.y = e.clientY;
     }
-    tool.a.click(this.x, this.y);
+    tool.click(this.x, this.y);
   }
 
   move(e) {
@@ -39,7 +39,7 @@ class Mouse {
       this.y = e.clientY;
     }
     drawing.refresh();
-    tool.a.move(this.x, this.y);
+    tool.move(this.x, this.y);
   }
 
   hide() {

@@ -26,9 +26,9 @@ export default function Line() {
   };
 
   this.reset = function() {
-    tool.a = new Line();
+    tool.change(new Line());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {

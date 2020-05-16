@@ -326,7 +326,7 @@ input:disabled {
   margin-left: 8px;
 }
 
-#color-button, #interface-link {
+#interface-link {
   display: none;
 }
 

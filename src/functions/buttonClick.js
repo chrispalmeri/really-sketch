@@ -16,16 +16,16 @@ function buttonHandler(button) {
 export default function buttonClick(e) {
   var youClicked = {
     "line-button": function() {
-      tool.a = new Line();
+      tool.change(new Line());
     },
     "arc-button": function() {
-      tool.a = new Arc();
+      tool.change(new Arc());
     },
     "text-button": function() {
-      tool.a = new Text();
+      tool.change(new Text());
     },
     "eraser-button": function() {
-      tool.a = new Eraser();
+      tool.change(new Eraser());
     },
     "undo-button": function() {
       drawing.undo();

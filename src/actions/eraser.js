@@ -20,9 +20,9 @@ export default function Eraser() {
   };
 
   this.reset = function() {
-    tool.a = new Eraser();
+    tool.change(new Eraser());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {

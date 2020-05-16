@@ -29,9 +29,9 @@ export default function Arc() {
   };
 
   this.reset = function() {
-    tool.a = new Arc();
+    tool.change(new Arc());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {

@@ -11,7 +11,7 @@ import colors from './../colors.js';
 
 window.addEventListener("load", function() {
   document.getElementById("text-input").addEventListener("keyup", function() {
-    tool.a = new Text();
+    tool.change(new Text());
   });
 });
 
@@ -31,9 +31,9 @@ export default function Text() {
   };
 
   this.reset = function() {
-    tool.a = new Text();
+    tool.change(new Text());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {

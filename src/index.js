@@ -24,7 +24,7 @@ window.addEventListener("load", function() {
 
   mouse.load();
 
-  tool.a = new Line();
+  tool.change(new Line());
   drawing.refresh();
 });
 
@@ -40,7 +40,7 @@ window.addEventListener("keydown", function(e) {
       drawing.undo();
     }
     if (e.keyCode === 27) {
-      tool.a.reset();
+      tool.reset();
       // also make sure options closes
       document.getElementById("options").style.display = "none";
     }
