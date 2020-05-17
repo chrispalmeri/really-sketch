@@ -2,21 +2,11 @@
 
 import canvas from './canvas.js';
 import colors from './colors.js';
+import options from './options.js';
 
 class Drawing {
   constructor() {
     this.drawing = {};
-    this.drawing.grid = 96 / 1;
-    this.drawing.divisions = 8;
-    this.drawing.tooltip = "1";
-    this.drawing.fractions = "0";
-    this.drawing.gridsnap = 1;
-    this.drawing.lengthsnap = 1;
-    this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
-    this.drawing.anglesnap = 15;
-    this.drawing.snap = this.drawing.grid / this.drawing.divisions * this.drawing.gridsnap;
-    this.drawing.endsnap = 1;
-
     this.drawing.points = [];
     this.drawing.objects = [];
   }
@@ -44,49 +34,40 @@ class Drawing {
     canvas.f.fillStyle = colors.cursor;
     canvas.f.lineCap = "square";
 
-    if (this.drawing.grid === 0 || this.drawing.divisions === 0) {
+    if (options.grid === 0 || options.divisions === 0) {
       return; // otherwise you crash your browser
     }
 
-    document.getElementById("grid").value = Math.round(96 * 100 / this.drawing.grid) / 100;
-    document.getElementById("divisions").value = this.drawing.divisions;
-    document.getElementById("tooltip").value = this.drawing.tooltip;
-    document.getElementById("fractions").value = this.drawing.fractions;
-    document.getElementById("gridsnap").value = this.drawing.gridsnap;
-    document.getElementById("lengthsnap").value = this.drawing.lengthsnap;
-    document.getElementById("anglesnap").value = this.drawing.anglesnap;
-    document.getElementById("endsnap").value = this.drawing.endsnap;
-
     var v, h;
     canvas.bg.beginPath();
-    v = this.drawing.grid / this.drawing.divisions;
+    v = options.grid / options.divisions;
     while (v < canvas.bg.canvas.width) {
       canvas.bg.moveTo(Math.round(v), 0);
       canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + (this.drawing.grid / this.drawing.divisions);
+      v = v + (options.grid / options.divisions);
     }
-    h = this.drawing.grid / this.drawing.divisions;
+    h = options.grid / options.divisions;
     while (Math.round(h) < canvas.bg.canvas.height) {
       canvas.bg.moveTo(0, Math.round(h));
       canvas.bg.lineTo(canvas.bg.canvas.width, h);
-      h = h + (this.drawing.grid / this.drawing.divisions);
+      h = h + (options.grid / options.divisions);
     }
     canvas.bg.lineWidth = 1;
     canvas.bg.strokeStyle = colors.secondary;
     canvas.bg.stroke();
 
     canvas.bg.beginPath();
-    v = this.drawing.grid;
+    v = options.grid;
     while (v < canvas.bg.canvas.width) {
       canvas.bg.moveTo(Math.round(v), 0);
       canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + this.drawing.grid;
+      v = v + options.grid;
     }
-    h = this.drawing.grid;
+    h = options.grid;
     while (h < canvas.bg.canvas.height) {
       canvas.bg.moveTo(0, Math.round(h));
       canvas.bg.lineTo(canvas.bg.canvas.width, Math.round(h));
-      h = h + this.drawing.grid;
+      h = h + options.grid;
     }
     canvas.bg.lineWidth = 1;
     canvas.bg.strokeStyle = colors.primary;
@@ -150,20 +131,22 @@ class Drawing {
         var temp = JSON.parse(e.target.result);
         this.drawing = temp.drawing;
 
-        // for previous version saves
-        if (this.drawing.lengthsnap === undefined) {
-          this.drawing.lengthsnap = 1;
-          this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
+        if (this.drawing.name) {
+          options.change('name', this.drawing.name);
+          delete this.drawing.name;
         }
-        if (this.drawing.name === undefined) {
-          this.drawing.name = "Drawing";
+        if (this.drawing.grid) {
+          options.change('grid', this.drawing.grid);
+          delete this.drawing.grid;
         }
-        if (this.drawing.tooltip === undefined) {
-          this.drawing.tooltip = "1";
+        if (this.drawing.divisions) {
+          options.change('divisions', this.drawing.divisions);
+          delete this.drawing.divisions;
         }
-        if (this.drawing.fractions === undefined) {
-          this.drawing.fractions = "0";
-        }
+
+        // might not want to change someone's default grid just cause they opened a particular drawing
+
+        // could delete a bunch of other options that are imported from old drawings
 
         // replace old colors with new here
         var colorMap = {
@@ -184,7 +167,6 @@ class Drawing {
           }
         });
 
-        document.getElementById("name").value = this.drawing.name;
         this.refresh();
       };
     };
@@ -192,26 +174,24 @@ class Drawing {
   }
 
   xport() {
-    var name = document.getElementById("name").value;
-    name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
-    if (name === "") {
-      name = "Drawing";
-    }
-
     var temp = {};
     temp.drawing = this.drawing;
-    temp.drawing.name = name;
+    temp.drawing.name = options.name;
+    temp.drawing.grid = options.grid;
+    temp.drawing.divisions = options.divisions;
+
+    // should tooltip go into the drawing?
+
     var json = JSON.stringify(temp);
 
     if (navigator.msSaveBlob) { // IE
       navigator.msSaveBlob(new Blob([json], {
         type: 'application/json'
-      }), name + ".json");
+      }), options.name + ".json");
     } else {
-
       var link = document.createElement("a");
       link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
-      link.setAttribute("download", name + ".json");
+      link.setAttribute("download", options.name + ".json");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -219,19 +199,14 @@ class Drawing {
   }
 
   save() {
-    var name = document.getElementById("name").value;
-    name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
-    if (name === "") {
-      name = "Drawing";
-    }
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
 
     if (navigator.msSaveBlob) { // IE 
-      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), name + ".png");
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), options.name + ".png");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-      link.setAttribute("download", name + ".png");
+      link.setAttribute("download", options.name + ".png");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

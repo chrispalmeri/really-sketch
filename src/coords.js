@@ -1,6 +1,6 @@
 // coords.js
 
-import drawing from './drawing.js';
+import options from './options.js';
 
 function cd(a, b) {
   if (!b) {
@@ -50,7 +50,7 @@ export default function convert(n) {
   }
 
   if (!degree) {
-    n = n / drawing.drawing.grid;
+    n = n / options.grid;
   } else {
     n = n * -180 / Math.PI;
     if (n < 0) {
@@ -61,16 +61,16 @@ export default function convert(n) {
   var output = '';
   var s = n;
 
-  if (drawing.drawing.tooltip === "2" && !degree) {
-    s = (n * drawing.drawing.divisions);
+  if (options.tooltip === "2" && !degree) {
+    s = (n * options.divisions);
   }
-  if (drawing.drawing.tooltip === "3" && !degree) {
+  if (options.tooltip === "3" && !degree) {
     let p = Math.floor(n);
     output += p + '&prime;&nbsp;';
-    s = ((n % 1) * drawing.drawing.divisions);
+    s = ((n % 1) * options.divisions);
   }
 
-  if (drawing.drawing.fractions === "1") {
+  if (options.fractions === "1") {
     if (degree) {
       s = toMinutes(s);
     } else {
@@ -82,7 +82,7 @@ export default function convert(n) {
 
   output += s;
 
-  if (drawing.drawing.tooltip === "3" && !degree) {
+  if (options.tooltip === "3" && !degree) {
     output += '&Prime;';
   }
 

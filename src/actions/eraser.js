@@ -6,6 +6,7 @@ import canvas from './../canvas.js';
 import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
+import options from './../options.js';
 
 export default function Eraser() {
   help(interaction.text + " to position eraser");
@@ -29,10 +30,10 @@ export default function Eraser() {
     if (this.points === 0) {
       this.coords.x = x;
       this.coords.y = y;
-      if (drawing.drawing.snap === 0) {
+      if (options.snap === 0) {
         this.coords.r = 16;
       } else {
-        this.coords.r = drawing.drawing.snap - 1;
+        this.coords.r = options.snap - 1;
       }
 
       canvas.f.beginPath();

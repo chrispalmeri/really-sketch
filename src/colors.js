@@ -6,7 +6,7 @@ window.addEventListener("load", function() {
   var current = storage.get('theme');
   if (current) {
     exp.theme(current);
-    document.getElementById("color-theme").value = current;
+    document.getElementById("colortheme").value = current;
   }
 });
 

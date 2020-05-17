@@ -7,6 +7,16 @@ weight: 2
 
 Changes to this project will be documented here.
 
+### [0.3.5] - Unreleased
+
+  * Reminder to re-minify js in app.html
+  
+  * Lots of code refactoring
+  * Maybe slight performance improvement
+  * Probably break IE11 with ES6 features 
+  * Drawing name validates on input instead of output
+  * Removed tooltip and snap options from export/import file
+
 ### [0.3.4] - 2020-05-15
 
   * Add option for color theme with blueprint and dark mode

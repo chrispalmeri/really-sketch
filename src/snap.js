@@ -3,6 +3,7 @@
 import drawing from './drawing.js';
 import mouse from './mouse.js';
 import convert from './coords.js';
+import options from './options.js';
 
 export default function snap(x, y, u, v) {
   var target = {
@@ -16,15 +17,15 @@ export default function snap(x, y, u, v) {
   var snapped = {};
   var snapper = 1;
   var snap2 = 1;
-  if (drawing.drawing.snap > 0) {
-    snapper = drawing.drawing.snap;
+  if (options.snap > 0) {
+    snapper = options.snap;
   }
-  if (drawing.drawing.lensnap > 0) {
-    snap2 = drawing.drawing.lensnap;
+  if (options.lensnap > 0) {
+    snap2 = options.lensnap;
   }
 
   var grid = {};
-  //if(drawing.drawing.snap === 0) {
+  //if(options.snap === 0) {
   //  grid.x = target.x;
   //  grid.y = target.y;
   //  grid.d = 100;
@@ -37,7 +38,7 @@ export default function snap(x, y, u, v) {
   // endpoints, just going to overwrite grid so I don't have to mess with
   // 3 way compar with angle later
   // does not work when gridsnap is turned off though
-  if (drawing.drawing.endsnap > 0) {
+  if (options.endsnap > 0) {
     // if grid snap is off initialize this to the first point before looping
     if (snapper === 1) {
       grid.x = drawing.drawing.points[0][0];
@@ -64,8 +65,8 @@ export default function snap(x, y, u, v) {
     var angle = {};
     var a = Math.atan2((target.y - origin.y), (target.x - origin.x));
 
-    if (drawing.drawing.anglesnap > 0) {
-      a = Math.round((a * 180 / Math.PI) / drawing.drawing.anglesnap) * drawing.drawing.anglesnap;
+    if (options.anglesnap > 0) {
+      a = Math.round((a * 180 / Math.PI) / options.anglesnap) * options.anglesnap;
       a = a * Math.PI / 180;
     }
     var r = Math.sqrt(Math.pow(target.x - origin.x, 2) + Math.pow(target.y - origin.y, 2));
@@ -76,8 +77,8 @@ export default function snap(x, y, u, v) {
     angle.y = Math.sin(a) * r + origin.y;
     angle.d = Math.sqrt(Math.pow(target.x - angle.x, 2) + Math.pow(target.y - angle.y, 2));
 
-    if (drawing.drawing.anglesnap > 0 || snap2 > 1) {
-      if (angle.d <= grid.d || (snapper == 1 && drawing.drawing.endsnap == 0)) {
+    if (options.anglesnap > 0 || snap2 > 1) {
+      if (angle.d <= grid.d || (snapper == 1 && options.endsnap == 0)) {
         snapped.x = angle.x;
         snapped.y = angle.y;
         coordX = r;
