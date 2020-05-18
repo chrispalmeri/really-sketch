@@ -1,7 +1,9 @@
 // options.js
 
+import storage from './storage.js';
+import colors from './colors.js';
+
 var op = {
-  name: 'Drawing',
   grid: 96 / 1,
   divisions: 8,
   tooltip: "1",
@@ -10,23 +12,23 @@ var op = {
   lengthsnap: 1,
   anglesnap: 15,
   endsnap: 1,
-  //colortheme: 'light',
-
   lensnap: 12,
   snap: 12,
+  colortheme: 'light',
 
-  change(option, value) {
+  change(option, value, sync = true) {
     this[option] = value;
-    this.sync();
-
-    // update storage
+    if (sync) {
+      this.sync();
+    }
   },
 
   sync() {
+    // recalc dependent values
     this.lensnap = this.grid / this.divisions * this.lengthsnap;
     this.snap = this.grid / this.divisions * this.gridsnap;
 
-    document.getElementById("name").value = this.name;
+    // update dom to match
     document.getElementById("grid").value = Math.round(96 * 100 / this.grid) / 100;
     document.getElementById("divisions").value = this.divisions;
     document.getElementById("tooltip").value = this.tooltip;
@@ -35,20 +37,35 @@ var op = {
     document.getElementById("lengthsnap").value = this.lengthsnap;
     document.getElementById("anglesnap").value = this.anglesnap;
     document.getElementById("endsnap").value = this.endsnap;
-    //document.getElementById("colortheme").value = this.colortheme;
+    document.getElementById("colortheme").value = this.colortheme;
+    document.body.className = this.colortheme;
+
+    // update canvas colors
+    colors.theme(this.colortheme);
+
+    // store in localstorage
+    storage.set('options', this);
   }
 };
 
 window.addEventListener("load", function() {
-  op.sync();
+  // handle the old theme value
+  var current = storage.get('theme');
+  if (current) {
+    op.change('colortheme', current, false);
+    storage.remove('theme');
+  }
 
-  document.getElementById("name").addEventListener("change", e => {
-    var desired = e.target.value.replace(/[^a-z0-9_\-\s.'()]/gi, '');
-    if (desired === "") {
-      desired = "Drawing";
+  // get any values from storage
+  var stored = storage.get('options');
+  if (stored) {
+    for (var prop in stored) {
+      op.change(prop, stored[prop], false);
     }
-    op.change('name', desired);
-  });
+  }
+
+  // sync once at the end
+  op.sync();
 });
 
 export default op;

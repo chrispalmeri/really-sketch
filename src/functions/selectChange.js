@@ -1,12 +1,21 @@
 // functions/selectChange.js
 
 import drawing from './../drawing.js';
-import colors from './../colors.js';
 import options from './../options.js';
 
 window.addEventListener("load", function() {
   var selects = document.getElementById('options').getElementsByTagName("select");
   Array.prototype.forEach.call(selects, selectHandler);
+
+  // this maybe should go in drawing, but it is a class so not sure how
+  document.getElementById("name").addEventListener("change", e => {
+    var desired = e.target.value.replace(/[^a-z0-9_\-\s.'()]/gi, '');
+    if (desired === "") {
+      desired = "Drawing";
+    }
+    drawing.drawing.name = desired;
+    document.getElementById("name").value = desired;
+  });
 });
 
 function selectHandler(select) {
@@ -14,10 +23,9 @@ function selectHandler(select) {
 }
 
 export default function selectChange(e) {
-  var youClicked = {
+  var youChanged = {
     "colortheme": function() {
-      colors.theme(e.target.value);
-      //options.change('colortheme', e.target.value);
+      options.change('colortheme', e.target.value);
       drawing.refresh();
     },
     "grid": function() {
@@ -47,5 +55,6 @@ export default function selectChange(e) {
       options.change('endsnap', e.target.value);
     }
   };
-  youClicked[e.target.id]();
+
+  youChanged[e.target.id]();
 }

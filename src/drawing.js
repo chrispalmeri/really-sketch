@@ -7,6 +7,7 @@ import options from './options.js';
 class Drawing {
   constructor() {
     this.drawing = {};
+    this.drawing.name = 'Drawing';
     this.drawing.points = [];
     this.drawing.objects = [];
   }
@@ -17,6 +18,9 @@ class Drawing {
   }
 
   clear() {
+    this.drawing.name = 'Drawing';
+    document.getElementById("name").value = this.drawing.name;
+    this.drawing.points.length = 0;
     this.drawing.objects.length = 0;
     this.refresh();
   }
@@ -132,8 +136,7 @@ class Drawing {
         this.drawing = temp.drawing;
 
         if (this.drawing.name) {
-          options.change('name', this.drawing.name);
-          delete this.drawing.name;
+          document.getElementById("name").value = this.drawing.name;
         }
         if (this.drawing.grid) {
           options.change('grid', this.drawing.grid);
@@ -176,7 +179,6 @@ class Drawing {
   xport() {
     var temp = {};
     temp.drawing = this.drawing;
-    temp.drawing.name = options.name;
     temp.drawing.grid = options.grid;
     temp.drawing.divisions = options.divisions;
 
@@ -187,11 +189,11 @@ class Drawing {
     if (navigator.msSaveBlob) { // IE
       navigator.msSaveBlob(new Blob([json], {
         type: 'application/json'
-      }), options.name + ".json");
+      }), this.drawing.name + ".json");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
-      link.setAttribute("download", options.name + ".json");
+      link.setAttribute("download", this.drawing.name + ".json");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -202,11 +204,11 @@ class Drawing {
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
 
     if (navigator.msSaveBlob) { // IE 
-      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), options.name + ".png");
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), this.drawing.name + ".png");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-      link.setAttribute("download", options.name + ".png");
+      link.setAttribute("download", this.drawing.name + ".png");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

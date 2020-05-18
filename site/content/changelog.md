@@ -13,9 +13,11 @@ Changes to this project will be documented here.
   
   * Lots of code refactoring
   * Maybe slight performance improvement
-  * Probably break IE11 with ES6 features 
+  * Probably break IE11 with ES6 features
   * Drawing name validates on input instead of output
   * Removed tooltip and snap options from export/import file
+  * Save options across sessions with local storage
+  * Added clear button to erase everything
 
 ### [0.3.4] - 2020-05-15
 

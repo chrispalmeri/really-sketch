@@ -62,5 +62,6 @@ export default function buttonClick(e) {
       drawing.import();
     }
   };
+
   youClicked[e.currentTarget.id]();
 }
