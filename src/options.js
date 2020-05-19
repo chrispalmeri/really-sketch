@@ -56,6 +56,15 @@ window.addEventListener("load", function() {
     storage.remove('theme');
   }
 
+  // set dark if prefers dark and never changed it before
+  if (
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches &&
+    op.colortheme === 'light'
+  ) {
+    op.change('colortheme', 'dark', false);
+  }
+
   // get any values from storage
   var stored = storage.get('options');
   if (stored) {
