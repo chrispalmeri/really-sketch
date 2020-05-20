@@ -13,7 +13,7 @@ window.addEventListener("load", function() {
     if (desired === "") {
       desired = "Drawing";
     }
-    drawing.drawing.name = desired;
+    drawing.setName(desired);
     document.getElementById("name").value = desired;
   });
 });

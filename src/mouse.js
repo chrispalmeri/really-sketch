@@ -4,11 +4,9 @@ import drawing from './drawing.js';
 import tool from './tool.js';
 import canvas from './canvas.js';
 
-class Mouse {
-  constructor() {
-    this.x = 0;
-    this.y = 0;
-  }
+export default {
+  x: 0,
+  y: 0,
 
   load() {
     canvas.f.canvas.addEventListener("mousedown", e => this.click(e));
@@ -16,7 +14,7 @@ class Mouse {
     canvas.f.canvas.addEventListener("touchend", e => this.click(e));
     canvas.f.canvas.addEventListener("touchmove", e => this.move(e));
     canvas.f.canvas.addEventListener("mouseout", this.hide);
-  }
+  },
 
   click(e) {
     if (e.touches) {
@@ -27,7 +25,7 @@ class Mouse {
       this.y = e.clientY;
     }
     tool.click(this.x, this.y);
-  }
+  },
 
   move(e) {
     if (e.touches) {
@@ -40,12 +38,10 @@ class Mouse {
     }
     drawing.refresh();
     tool.move(this.x, this.y);
-  }
+  },
 
   hide() {
     document.getElementById("coords").style.display = "none";
     drawing.refresh();
   }
-}
-
-export default new Mouse();
+};

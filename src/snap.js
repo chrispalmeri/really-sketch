@@ -41,16 +41,16 @@ export default function snap(x, y, u, v) {
   if (options.endsnap > 0) {
     // if grid snap is off initialize this to the first point before looping
     if (snapper === 1) {
-      grid.x = drawing.drawing.points[0][0];
-      grid.y = drawing.drawing.points[0][1];
-      grid.d = Math.sqrt(Math.pow(target.x - drawing.drawing.points[0][0], 2) + Math.pow(target.y - drawing.drawing.points[0][1], 2));
+      grid.x = drawing.points[0][0];
+      grid.y = drawing.points[0][1];
+      grid.d = Math.sqrt(Math.pow(target.x - drawing.points[0][0], 2) + Math.pow(target.y - drawing.points[0][1], 2));
     }
     //loop through points
-    for (var i = 0; i < drawing.drawing.points.length; i++) {
-      var dist = Math.sqrt(Math.pow(target.x - drawing.drawing.points[i][0], 2) + Math.pow(target.y - drawing.drawing.points[i][1], 2));
+    for (var i = 0; i < drawing.points.length; i++) {
+      var dist = Math.sqrt(Math.pow(target.x - drawing.points[i][0], 2) + Math.pow(target.y - drawing.points[i][1], 2));
       if (dist <= grid.d) {
-        grid.x = drawing.drawing.points[i][0];
-        grid.y = drawing.drawing.points[i][1];
+        grid.x = drawing.points[i][0];
+        grid.y = drawing.points[i][1];
         grid.d = dist;
       }
     }

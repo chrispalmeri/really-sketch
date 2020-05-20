@@ -55,7 +55,7 @@ export default function Text() {
     if (selectedColor) {
       this.coords.color = selectedColor;
     }
-    drawing.drawing.objects.push(this.coords);
+    drawing.addItem(this.coords);
     mouse.hide();
   };
 }

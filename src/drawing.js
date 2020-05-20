@@ -4,26 +4,35 @@ import canvas from './canvas.js';
 import colors from './colors.js';
 import options from './options.js';
 
-class Drawing {
-  constructor() {
-    this.drawing = {};
-    this.drawing.name = 'Drawing';
-    this.drawing.points = [];
-    this.drawing.objects = [];
-  }
+export default {
+  name: 'Drawing',
+  points: [],
+  objects: [],
+
+  addItem(item) {
+    this.objects.push(item);
+  },
+
+  addSnap(snap) {
+    this.points.push(snap);
+  },
+
+  setName(name) {
+    this.name = name;
+  },
 
   undo() {
-    this.drawing.objects.splice(-1, 1);
+    this.objects.splice(-1, 1);
     this.refresh();
-  }
+  },
 
   clear() {
-    this.drawing.name = 'Drawing';
-    document.getElementById("name").value = this.drawing.name;
-    this.drawing.points.length = 0;
-    this.drawing.objects.length = 0;
+    this.name = 'Drawing';
+    document.getElementById("name").value = this.name;
+    this.points.length = 0;
+    this.objects.length = 0;
     this.refresh();
-  }
+  },
 
   refresh() {
     canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
@@ -79,7 +88,7 @@ class Drawing {
 
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.default;
-    this.drawing.objects.forEach(function(obj) {
+    this.objects.forEach(function(obj) {
       if (obj.color) {
         canvas.f.strokeStyle = obj.color;
       } else {
@@ -122,7 +131,7 @@ class Drawing {
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.preview;
     canvas.f.fillStyle = colors.cursor;
-  }
+  },
 
   import() {
     var upload = document.createElement("input");
@@ -132,24 +141,49 @@ class Drawing {
       var file = e.target.files[0];
       reader.readAsText(file, "utf-8");
       reader.onload = (e) => {
-        var temp = JSON.parse(e.target.result);
-        this.drawing = temp.drawing;
+        var parsed = JSON.parse(e.target.result);
 
-        if (this.drawing.name) {
-          document.getElementById("name").value = this.drawing.name;
+        // old or new exports
+        var temp = parsed.drawing || parsed;
+
+        this.name = temp.name || 'Drawing';
+        this.points = temp.points || [];
+        this.objects = temp.objects || [];
+
+        if (temp.grid) {
+          options.change('grid', temp.grid, false);
         }
-        if (this.drawing.grid) {
-          options.change('grid', this.drawing.grid);
-          delete this.drawing.grid;
-        }
-        if (this.drawing.divisions) {
-          options.change('divisions', this.drawing.divisions);
-          delete this.drawing.divisions;
+        if (temp.divisions) {
+          options.change('divisions', temp.divisions, false);
         }
 
-        // might not want to change someone's default grid just cause they opened a particular drawing
-
-        // could delete a bunch of other options that are imported from old drawings
+        // set other options from old exports 
+        // since that's what it used to do
+        // but won't have any effect going forward
+        if (temp.tooltip) {
+          options.change('tooltip', temp.tooltip, false);
+        }
+        if (temp.fractions) {
+          options.change('fractions', temp.fractions, false);
+        }
+        if (temp.gridsnap) {
+          options.change('gridsnap', temp.gridsnap, false);
+        }
+        if (temp.lengthsnap) {
+          options.change('lengthsnap', temp.lengthsnap, false);
+        }
+        if (temp.lensnap) {
+          options.change('lensnap', temp.lensnap, false);
+        }
+        if (temp.anglesnap) {
+          options.change('anglesnap', temp.anglesnap, false);
+        }
+        if (temp.snap) {
+          options.change('snap', temp.snap, false);
+        }
+        if (temp.endsnap) {
+          options.change('endsnap', temp.endsnap, false);
+        }
 
         // replace old colors with new here
         var colorMap = {
@@ -161,7 +195,7 @@ class Drawing {
           Purple: '#b10dc9',
         };
 
-        this.drawing.objects.forEach(function(obj) {
+        this.objects.forEach(function(obj) {
           if (obj.colour) {
             if (colorMap[obj.colour]) {
               obj.color = colorMap[obj.colour];
@@ -170,50 +204,52 @@ class Drawing {
           }
         });
 
+        // display it all
+        document.getElementById("name").value = this.name;
+        options.sync();
         this.refresh();
       };
     };
     upload.click();
-  }
+  },
 
   xport() {
-    var temp = {};
-    temp.drawing = this.drawing;
-    temp.drawing.grid = options.grid;
-    temp.drawing.divisions = options.divisions;
+    var json = JSON.stringify({
+      name: this.name,
+      grid: options.grid,
+      divisions: options.divisions,
+      points: this.points,
+      objects: this.objects
+    });
 
     // should tooltip go into the drawing?
-
-    var json = JSON.stringify(temp);
 
     if (navigator.msSaveBlob) { // IE
       navigator.msSaveBlob(new Blob([json], {
         type: 'application/json'
-      }), this.drawing.name + ".json");
+      }), this.name + ".json");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
-      link.setAttribute("download", this.drawing.name + ".json");
+      link.setAttribute("download", this.name + ".json");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
-  }
+  },
 
   save() {
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
 
     if (navigator.msSaveBlob) { // IE 
-      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), this.drawing.name + ".png");
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), this.name + ".png");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-      link.setAttribute("download", this.drawing.name + ".png");
+      link.setAttribute("download", this.name + ".png");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
   }
-}
-
-export default new Drawing();
+};

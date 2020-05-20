@@ -58,9 +58,9 @@ export default function Line() {
       this.coords.color = selectedColor;
     }
     this.coords.width = document.getElementById('line_width').value;
-    drawing.drawing.objects.push(this.coords);
-    drawing.drawing.points.push([this.coords.x, this.coords.y]);
-    drawing.drawing.points.push([this.coords.u, this.coords.v]);
+    drawing.addItem(this.coords);
+    drawing.addSnap([this.coords.x, this.coords.y]);
+    drawing.addSnap([this.coords.u, this.coords.v]);
     mouse.hide();
   };
 }

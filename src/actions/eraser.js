@@ -46,7 +46,7 @@ export default function Eraser() {
   };
 
   this.save = function() {
-    drawing.drawing.objects.push(this.coords);
+    drawing.addItem(this.coords);
     mouse.hide();
   };
 }

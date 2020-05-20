@@ -79,10 +79,10 @@ export default function Arc() {
       this.coords.color = selectedColor;
     }
     this.coords.width = document.getElementById('line_width').value;
-    drawing.drawing.objects.push(this.coords);
-    drawing.drawing.points.push([this.coords.x, this.coords.y]);
-    drawing.drawing.points.push([this.coords.x + this.coords.r * Math.cos(this.coords.a), this.coords.y + this.coords.r * Math.sin(this.coords.a)]);
-    drawing.drawing.points.push([this.coords.x + this.coords.r * Math.cos(this.coords.b), this.coords.y + this.coords.r * Math.sin(this.coords.b)]);
+    drawing.addItem(this.coords);
+    drawing.addSnap([this.coords.x, this.coords.y]);
+    drawing.addSnap([this.coords.x + this.coords.r * Math.cos(this.coords.a), this.coords.y + this.coords.r * Math.sin(this.coords.a)]);
+    drawing.addSnap([this.coords.x + this.coords.r * Math.cos(this.coords.b), this.coords.y + this.coords.r * Math.sin(this.coords.b)]);
     mouse.hide();
   };
 }
