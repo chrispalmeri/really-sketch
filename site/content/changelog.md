@@ -15,8 +15,10 @@ Changes to this project will be documented here.
   * Better minifier
   * Drawing name validates on input instead of output
   * Removed tooltip and snap options from export/import file
+    * although old imports still work
   * Save options across sessions with local storage
   * Added clear button to erase everything
+  * Save drawing across sessions with local storage
 
 ### [0.3.4] - 2020-05-15
 

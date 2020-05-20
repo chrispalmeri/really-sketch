@@ -3,27 +3,32 @@
 import canvas from './canvas.js';
 import colors from './colors.js';
 import options from './options.js';
+import storage from './storage.js';
 
-export default {
+var drw = {
   name: 'Drawing',
   points: [],
   objects: [],
 
   addItem(item) {
     this.objects.push(item);
+    storage.set('drawing', this);
   },
 
   addSnap(snap) {
     this.points.push(snap);
+    storage.set('drawing', this);
   },
 
   setName(name) {
     this.name = name;
+    storage.set('drawing', this);
   },
 
   undo() {
     this.objects.splice(-1, 1);
     this.refresh();
+    storage.set('drawing', this);
   },
 
   clear() {
@@ -32,6 +37,7 @@ export default {
     this.points.length = 0;
     this.objects.length = 0;
     this.refresh();
+    storage.set('drawing', this);
   },
 
   refresh() {
@@ -207,6 +213,7 @@ export default {
         // display it all
         document.getElementById("name").value = this.name;
         options.sync();
+        storage.set('drawing', this);
         this.refresh();
       };
     };
@@ -253,3 +260,18 @@ export default {
     }
   }
 };
+
+window.addEventListener("load", function() {
+  // get from storage
+  var stored = storage.get('drawing');
+  if (stored) {
+    drw.name = stored.name;
+    drw.points = stored.points;
+    drw.objects = stored.objects;
+
+    document.getElementById("name").value = drw.name;
+    drw.refresh();
+  }
+});
+
+export default drw;
