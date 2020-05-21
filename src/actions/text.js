@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
     tool.change(new Text());
   });
 
-  if(document.fonts) {
+  if (document.fonts) {
     document.fonts.ready.then(function() {
       drawing.refresh();
     });

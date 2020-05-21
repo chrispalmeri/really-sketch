@@ -8,21 +8,15 @@ weight: 2
 Changes to this project will be documented here.
 
 ### [0.3.5] - Unreleased
-  
-  * Lots of code refactoring
-  * Maybe slight performance improvement
-  * Add babel to not break IE11 with ES6 features
-  * Better minifier
-  * Drawing name validates on input instead of output
-  * Removed tooltip and snap options from export/import file
-    * although old imports still work
-  * Save options across sessions with local storage
-  * Added clear button to erase everything
-  * Save drawing across sessions with local storage
-  * Fix some small display glitches
-    * with unstyled fonts showing
-    * with options dialog position
-    * when saving image
+
+  * Add drawing and options to local storage to preserve between sessions
+  * Add button in options to clear the drawing
+  * Remove most options from export files
+  * Fix project name not reflecting sanitized name
+  * Fix display glitch when generating PNG
+  * Fix initial font loading, except for IE/Edge
+  * Fix dialog position/scrollbar in IE/Edge
+  * Fix a lot of code cleanup items
 
 ### [0.3.4] - 2020-05-15
 
