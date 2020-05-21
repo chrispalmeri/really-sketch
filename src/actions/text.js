@@ -13,6 +13,12 @@ window.addEventListener("load", function() {
   document.getElementById("text-input").addEventListener("keyup", function() {
     tool.change(new Text());
   });
+
+  if(document.fonts) {
+    document.fonts.ready.then(function() {
+      drawing.refresh();
+    });
+  }
 });
 
 export default function Text() {

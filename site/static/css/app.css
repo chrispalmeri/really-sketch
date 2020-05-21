@@ -188,10 +188,11 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 }
 .dialog div {
   position: absolute;
-  top: 50%;
+  bottom: 50%;
   left: 32px;
   right: 32px;
-  transform: translate(0, -50%);
+  transform: translate(0, 50%);
+  width: 75%;
   max-width: 440px;
   background: #fff;
   background: var(--background);

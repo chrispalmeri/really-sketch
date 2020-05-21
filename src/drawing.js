@@ -258,6 +258,8 @@ var drw = {
       link.click();
       document.body.removeChild(link);
     }
+    
+    this.refresh();
   }
 };
 

@@ -19,6 +19,10 @@ Changes to this project will be documented here.
   * Save options across sessions with local storage
   * Added clear button to erase everything
   * Save drawing across sessions with local storage
+  * Fix some small display glitches
+    * with unstyled fonts showing
+    * with options dialog position
+    * when saving image
 
 ### [0.3.4] - 2020-05-15
 
