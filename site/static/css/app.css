@@ -119,7 +119,6 @@ select {
   float: right;
   width: 100px;
 }
-/* removed ", #about a" from next three rules */
 button, .actions a {
   color: #000000;
   color: var(--text);
@@ -156,7 +155,6 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-/* removed ", #about a" from following rule */
 .actions button, .actions a {
   width: 64px;
   position: relative;
@@ -239,7 +237,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   fill: var(--text);
 }
 .dialog aside {
-  height: 258px; /*248px;*/ /* 334 - header */
+  height: 258px;
   width: 30%;
   float: left;
   background: #EEEEEE;
@@ -293,7 +291,6 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   border: 1px solid var(--border);
   border-radius: 2px;
 }
-/* removed ", #about a" from following rule */
 .dialog section button {
   float: right;
   width: 100px;
@@ -308,12 +305,6 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   background: #ff7676;
   background: var(--danger);
 }
-/* #about input {
-  text-align: center;
-}
-input:disabled {
-  background: #eee;
-} */
 #about a {
   color: #5F94C8;
   color: var(--link);
@@ -339,10 +330,6 @@ input:disabled {
   border: 1px solid var(--border);
   border-radius: 2px;
   margin-left: 8px;
-}
-
-#interface-link {
-  display: none;
 }
 
 /* theme items that couldn't use vars */

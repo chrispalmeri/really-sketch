@@ -36,22 +36,6 @@ export default function buttonClick(e) {
     "options-close": function() {
       document.getElementById("options").style.display = "none";
     },
-    "info": function() {
-      // var dpi = "<table><tr><td width=\"60%\">Window Width:</td><td>" + document.body.clientWidth;
-      // dpi += "</td></tr><tr><td>Device Pixel Ratio:</td><td>" + window.devicePixelRatio;
-      // dpi += "</td></tr><tr><td>Touch Screen:</td><td>" + interaction.touch;
-      // dpi += "</td></tr></table>";
-      // document.getElementById("dpi").innerHTML = dpi;
-
-      document.getElementById("drawingOptions").style.display = 'none';
-      document.getElementById("appInfo").style.display = 'block';
-    },
-    "ok": function() {
-      document.getElementById("appInfo").style.display = 'none';
-    },
-    "clear": function() {
-      drawing.clear();
-    },
     "save": function() {
       drawing.save();
     },
@@ -60,6 +44,9 @@ export default function buttonClick(e) {
     },
     "import": function() {
       drawing.import();
+    },
+    "clear": function() {
+      drawing.clear();
     }
   };
 
