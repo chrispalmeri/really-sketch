@@ -16,6 +16,7 @@ Changes to this project will be documented here.
   * Fix display glitch when generating PNG
   * Fix initial font loading, except for IE/Edge
   * Fix dialog position/scrollbar in IE/Edge
+  * Fix fraction size/uniformity across browsers
   * Fix a lot of code cleanup items
 
 ### [0.3.4] - 2020-05-15

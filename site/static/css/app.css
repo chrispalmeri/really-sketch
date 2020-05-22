@@ -71,6 +71,10 @@ footer {
   display: none;
 }
 
+sup, sub {
+  font: 10px sans-serif;
+}
+
 /* division */
 
 body {

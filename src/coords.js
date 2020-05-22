@@ -32,7 +32,7 @@ function toFraction(n) {
 
   if (fraction) {
     let com = cd(max, fraction);
-    string += '&#8239;' + fraction / com + '&frasl;' + max / com;
+    string += '&#8239;<sup>' + fraction / com + '</sup>&frasl;<sub>' + max / com + '</sub>';
   }
 
   return string;
