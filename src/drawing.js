@@ -40,60 +40,64 @@ var drw = {
     storage.set('drawing', this);
   },
 
-  refresh() {
-    canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
-    canvas.f.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
-    canvas.f.translate(0.5, 0.5);
-    canvas.bg.canvas.width = document.body.clientWidth; //window.innerWidth;
-    canvas.bg.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
-    canvas.bg.translate(0.5, 0.5);
+  refresh(all = false) {
+    if (all) {
+      // reset the background
+      canvas.bg.canvas.width = document.body.clientWidth; //window.innerWidth;
+      canvas.bg.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
+      canvas.bg.translate(0.5, 0.5);
+      canvas.bg.fillStyle = colors.background;
+      canvas.bg.fillRect(-1, -1, canvas.bg.canvas.width + 1, canvas.bg.canvas.height + 1);
+
+      // draw the grid
+      if (options.grid && options.divisions) {
+        var v, h;
+        canvas.bg.beginPath();
+        v = options.grid / options.divisions;
+        while (v < canvas.bg.canvas.width) {
+          canvas.bg.moveTo(Math.round(v), 0);
+          canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
+          v = v + (options.grid / options.divisions);
+        }
+        h = options.grid / options.divisions;
+        while (Math.round(h) < canvas.bg.canvas.height) {
+          canvas.bg.moveTo(0, Math.round(h));
+          canvas.bg.lineTo(canvas.bg.canvas.width, h);
+          h = h + (options.grid / options.divisions);
+        }
+        canvas.bg.lineWidth = 1;
+        canvas.bg.strokeStyle = colors.secondary;
+        canvas.bg.stroke();
+
+        canvas.bg.beginPath();
+        v = options.grid;
+        while (v < canvas.bg.canvas.width) {
+          canvas.bg.moveTo(Math.round(v), 0);
+          canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
+          v = v + options.grid;
+        }
+        h = options.grid;
+        while (h < canvas.bg.canvas.height) {
+          canvas.bg.moveTo(0, Math.round(h));
+          canvas.bg.lineTo(canvas.bg.canvas.width, Math.round(h));
+          h = h + options.grid;
+        }
+        canvas.bg.lineWidth = 1;
+        canvas.bg.strokeStyle = colors.primary;
+        canvas.bg.stroke();
+      }
+
+      // reset the foreground
+      canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
+      canvas.f.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
+      canvas.f.translate(0.5, 0.5);
+      canvas.f.lineCap = "square";
+    }
+
+    // clear foreground
     canvas.f.clearRect(0, 0, canvas.f.canvas.width, canvas.f.canvas.height);
-    canvas.bg.fillStyle = colors.background;
-    canvas.bg.fillRect(-1, -1, canvas.bg.canvas.width + 1, canvas.bg.canvas.height + 1);
-    canvas.f.fillStyle = colors.cursor;
-    canvas.f.lineCap = "square";
 
-    if (options.grid === 0 || options.divisions === 0) {
-      return; // otherwise you crash your browser
-    }
-
-    var v, h;
-    canvas.bg.beginPath();
-    v = options.grid / options.divisions;
-    while (v < canvas.bg.canvas.width) {
-      canvas.bg.moveTo(Math.round(v), 0);
-      canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + (options.grid / options.divisions);
-    }
-    h = options.grid / options.divisions;
-    while (Math.round(h) < canvas.bg.canvas.height) {
-      canvas.bg.moveTo(0, Math.round(h));
-      canvas.bg.lineTo(canvas.bg.canvas.width, h);
-      h = h + (options.grid / options.divisions);
-    }
-    canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = colors.secondary;
-    canvas.bg.stroke();
-
-    canvas.bg.beginPath();
-    v = options.grid;
-    while (v < canvas.bg.canvas.width) {
-      canvas.bg.moveTo(Math.round(v), 0);
-      canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + options.grid;
-    }
-    h = options.grid;
-    while (h < canvas.bg.canvas.height) {
-      canvas.bg.moveTo(0, Math.round(h));
-      canvas.bg.lineTo(canvas.bg.canvas.width, Math.round(h));
-      h = h + options.grid;
-    }
-    canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = colors.primary;
-    canvas.bg.stroke();
-
-    canvas.f.lineWidth = 2;
-    canvas.f.strokeStyle = colors.default;
+    // draw the objects
     this.objects.forEach(function(obj) {
       if (obj.color) {
         canvas.f.strokeStyle = obj.color;
@@ -134,6 +138,8 @@ var drw = {
         canvas.f.shadowBlur = 0;
       }
     });
+
+    // leave setup for cursor and preview
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.preview;
     canvas.f.fillStyle = colors.cursor;
@@ -214,7 +220,7 @@ var drw = {
         document.getElementById("name").value = this.name;
         options.sync();
         storage.set('drawing', this);
-        this.refresh();
+        this.refresh(true);
       };
     };
     upload.click();
@@ -259,7 +265,7 @@ var drw = {
       document.body.removeChild(link);
     }
 
-    this.refresh();
+    this.refresh(true);
   }
 };
 
@@ -272,7 +278,7 @@ window.addEventListener("load", function() {
     drw.objects = stored.objects;
 
     document.getElementById("name").value = drw.name;
-    drw.refresh();
+    drw.refresh(true);
   }
 });
 

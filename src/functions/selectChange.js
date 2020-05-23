@@ -26,15 +26,15 @@ export default function selectChange(e) {
   var youChanged = {
     "colortheme": function() {
       options.change('colortheme', e.target.value);
-      drawing.refresh();
+      drawing.refresh(true);
     },
     "grid": function() {
       options.change('grid', 96 / e.target.value);
-      drawing.refresh();
+      drawing.refresh(true);
     },
     "divisions": function() {
       options.change('divisions', e.target.value);
-      drawing.refresh();
+      drawing.refresh(true);
     },
     "tooltip": function() {
       options.change('tooltip', e.target.value);

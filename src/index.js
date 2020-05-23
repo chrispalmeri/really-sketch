@@ -25,11 +25,11 @@ window.addEventListener("load", function() {
   mouse.load();
 
   tool.change(new Line());
-  drawing.refresh();
+  drawing.refresh(true);
 });
 
 window.addEventListener("resize", function() {
-  drawing.refresh();
+  drawing.refresh(true);
 });
 
 window.addEventListener("keydown", function(e) {
