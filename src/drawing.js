@@ -269,16 +269,38 @@ var drw = {
   }
 };
 
-window.addEventListener("load", function() {
-  // get from storage
-  var stored = storage.get('drawing');
-  if (stored) {
-    drw.name = stored.name;
-    drw.points = stored.points;
-    drw.objects = stored.objects;
+var maintab = false;
 
-    document.getElementById("name").value = drw.name;
-    drw.refresh(true);
+window.addEventListener("load", function() {
+  // I wanna be the maintab
+  var mt = storage.get('maintab');
+  if (!mt) {
+    storage.set('maintab', 'true');
+    maintab = true;
+
+    // get drawing from storage
+    var stored = storage.get('drawing');
+    if (stored) {
+      drw.name = stored.name;
+      drw.points = stored.points;
+      drw.objects = stored.objects;
+
+      document.getElementById("name").value = drw.name;
+      drw.refresh(true);
+    }
+  }
+});
+
+window.addEventListener("unload", function() {
+  // keep the maintab honest
+  storage.remove('maintab');
+});
+
+window.addEventListener("storage", function() {
+  // don't take the maintab away from me
+  var mt = storage.get('maintab');
+  if (maintab && !mt) {
+    storage.set('maintab', 'true');
   }
 });
 
