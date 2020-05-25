@@ -34,5 +34,8 @@ disableKinds = ["section", "taxonomy", "taxonomyTerm", "RSS"]
     url = "https://www.paypal.me/chrispalmeri"
     weight = 2
 
-[blackfriday]
-  smartypants = false
+[markup.goldmark.extensions]
+  typographer = false
+
+[markup.goldmark.renderer]
+  unsafe= true

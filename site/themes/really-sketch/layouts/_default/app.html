@@ -19,7 +19,7 @@
 <meta name="apple-mobile-web-app-title" content="Really Sketch">
 <meta name="application-name" content="Really Sketch">
 <meta name="theme-color" content="#84b0d2">
-{{ $js := resources.Get "js/bundle.js" | minify }}
+{{ $js := resources.Get "js/bundle.min.js" }}
 <script src="{{ $js.RelPermalink }}"></script>
 <link rel="stylesheet" href="/css/app.css" />
 </head>
@@ -60,7 +60,6 @@
     <li><button id="text-button">Text</button></li>
     <li><input id="text-input" value="Example" /></li>
     <li><button id="eraser-button">Eraser</button></li>
-    <li><button id="color-button">Color</button></li>
     <li><button id="undo-button">Undo</button></li>
     <li><button id="options-button">Options</button></li>
     <li><a target="_blank" href="https://chrispalmeri.gitbook.io/really-sketch/">Help</a></li>
@@ -79,7 +78,6 @@
     <nav>
       <ul>
         <li><a id="file-link" href="#file">Project</a></li>
-        <li><a id="interface-link" href="#interface">Interface</a></li>
         <li><a id="units-link" href="#units">Units</a></li>
         <li><a id="snaps-link" href="#snaps">Snaps</a></li>
         <li><a id="theme-link" href="#theme">Theme</a></li>
@@ -94,40 +92,7 @@
     <p>Save As Image: <button id="save">Save</button></p>
     <p>Export JSON File: <button id="export">Export</button></p>
     <p>Import JSON File: <button id="import">Import</button></p>
-  </section>
-  <section id="interface">
-    <h3>Interface</h3>
-    <p>Drawing Mode:
-      <select>
-        <option>Drafting</option>
-        <option>Pixel Art</option>
-      </select>
-    </p>
-    <p>Grid Style:
-      <select>
-        <option>None</option>
-        <option>Lines</option>
-        <option>Dots</option>
-      </select>
-    </p>
-    <p>Snap Marker:
-      <select>
-        <option>Off</option>
-        <option>On</option>
-      </select>
-    </p>
-    <p>Tooltip:
-      <select>
-        <option>Off</option>
-        <option>On</option>
-      </select>
-    </p>
-    <p>Hints:
-      <select>
-        <option>Off</option>
-        <option>On</option>
-      </select>
-    </p>
+    <p>Erase Everything: <button id="clear">Clear</button></p>
   </section>
   <section id="units">
     <h3>Units</h3>
@@ -198,18 +163,12 @@
   <section id="theme">
     <h3>Theme</h3>
     <p>Color Theme:
-      <select id="color-theme">
+      <select id="colortheme">
         <option value="light">Light</option>
         <option value="blue">Blue</option>
         <option value="dark">Dark</option>
       </select>
     </p>
-    <!-- <p>Two Color Grid:
-      <select>
-        <option>Off</option>
-        <option>On</option>
-      </select>
-    </p> -->
   </section>
   <section id="shortcuts">
     <h3>Shortcuts</h3>

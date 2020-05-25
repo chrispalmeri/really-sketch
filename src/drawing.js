@@ -1,96 +1,104 @@
+// drawing.js
+
 import canvas from './canvas.js';
 import colors from './colors.js';
+import options from './options.js';
+import storage from './storage.js';
 
-export default new function() {
-  this.drawing = new Object();
-  this.drawing.grid = 96 / 1;
-  this.drawing.divisions = 8;
-  this.drawing.tooltip = "1";
-  this.drawing.fractions = "0";
-  this.drawing.gridsnap = 1;
-  this.drawing.lengthsnap = 1;
-  this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
-  this.drawing.anglesnap = 15;
-  this.drawing.snap = this.drawing.grid / this.drawing.divisions * this.drawing.gridsnap;
-  this.drawing.endsnap = 1;
+var drw = {
+  name: 'Drawing',
+  points: [],
+  objects: [],
 
-  this.drawing.points = [];
-  this.drawing.objects = [];
+  addItem(item) {
+    this.objects.push(item);
+    storage.set('drawing', this);
+  },
 
-  this.undo = function() {
-    this.drawing.objects.splice(-1,1);
+  addSnap(snap) {
+    this.points.push(snap);
+    storage.set('drawing', this);
+  },
+
+  setName(name) {
+    this.name = name;
+    storage.set('drawing', this);
+  },
+
+  undo() {
+    this.objects.splice(-1, 1);
     this.refresh();
-  };
+    storage.set('drawing', this);
+  },
 
-  this.clear = function() {
-    this.drawing.objects.length = 0;
+  clear() {
+    this.name = 'Drawing';
+    document.getElementById("name").value = this.name;
+    this.points.length = 0;
+    this.objects.length = 0;
     this.refresh();
-  };
+    storage.set('drawing', this);
+  },
 
-  this.refresh = function() {
-    canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
-    canvas.f.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
-    canvas.f.translate(0.5, 0.5);
-    canvas.bg.canvas.width = document.body.clientWidth; //window.innerWidth;
-    canvas.bg.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
-    canvas.bg.translate(0.5, 0.5);
+  refresh(all = false) {
+    if (all) {
+      // reset the background
+      canvas.bg.canvas.width = document.body.clientWidth; //window.innerWidth;
+      canvas.bg.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
+      canvas.bg.translate(0.5, 0.5);
+      canvas.bg.fillStyle = colors.background;
+      canvas.bg.fillRect(-1, -1, canvas.bg.canvas.width + 1, canvas.bg.canvas.height + 1);
+
+      // draw the grid
+      if (options.grid && options.divisions) {
+        var v, h;
+        canvas.bg.beginPath();
+        v = options.grid / options.divisions;
+        while (v < canvas.bg.canvas.width) {
+          canvas.bg.moveTo(Math.round(v), 0);
+          canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
+          v = v + (options.grid / options.divisions);
+        }
+        h = options.grid / options.divisions;
+        while (Math.round(h) < canvas.bg.canvas.height) {
+          canvas.bg.moveTo(0, Math.round(h));
+          canvas.bg.lineTo(canvas.bg.canvas.width, h);
+          h = h + (options.grid / options.divisions);
+        }
+        canvas.bg.lineWidth = 1;
+        canvas.bg.strokeStyle = colors.secondary;
+        canvas.bg.stroke();
+
+        canvas.bg.beginPath();
+        v = options.grid;
+        while (v < canvas.bg.canvas.width) {
+          canvas.bg.moveTo(Math.round(v), 0);
+          canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
+          v = v + options.grid;
+        }
+        h = options.grid;
+        while (h < canvas.bg.canvas.height) {
+          canvas.bg.moveTo(0, Math.round(h));
+          canvas.bg.lineTo(canvas.bg.canvas.width, Math.round(h));
+          h = h + options.grid;
+        }
+        canvas.bg.lineWidth = 1;
+        canvas.bg.strokeStyle = colors.primary;
+        canvas.bg.stroke();
+      }
+
+      // reset the foreground
+      canvas.f.canvas.width = document.body.clientWidth; //window.innerWidth;
+      canvas.f.canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight); //window.innerHeight;
+      canvas.f.translate(0.5, 0.5);
+      canvas.f.lineCap = "square";
+    }
+
+    // clear foreground
     canvas.f.clearRect(0, 0, canvas.f.canvas.width, canvas.f.canvas.height);
-    canvas.bg.fillStyle = colors.background;
-    canvas.bg.fillRect(-1, -1, canvas.bg.canvas.width + 1, canvas.bg.canvas.height + 1);
-    canvas.f.fillStyle = colors.cursor;
-    canvas.f.lineCap = "square";
-    
-    if(this.drawing.grid === 0 || this.drawing.divisions === 0) {
-      return; // otherwise you crash your browser
-    }
-    
-    document.getElementById("grid").value = Math.round(96 * 100 / this.drawing.grid) / 100;
-    document.getElementById("divisions").value = this.drawing.divisions;
-    document.getElementById("tooltip").value = this.drawing.tooltip;
-    document.getElementById("fractions").value = this.drawing.fractions;
-    document.getElementById("gridsnap").value = this.drawing.gridsnap;
-    document.getElementById("lengthsnap").value = this.drawing.lengthsnap;
-    document.getElementById("anglesnap").value = this.drawing.anglesnap;
-    document.getElementById("endsnap").value = this.drawing.endsnap;
-    
-    var v, h;
-    canvas.bg.beginPath();
-    v = this.drawing.grid / this.drawing.divisions;
-    while (v < canvas.bg.canvas.width) {
-      canvas.bg.moveTo(Math.round(v), 0);
-      canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + (this.drawing.grid / this.drawing.divisions);
-    }
-    h = this.drawing.grid / this.drawing.divisions;
-    while (Math.round(h) < canvas.bg.canvas.height) {
-      canvas.bg.moveTo(0, Math.round(h));
-      canvas.bg.lineTo(canvas.bg.canvas.width, h);
-      h = h + (this.drawing.grid / this.drawing.divisions);
-    }
-    canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = colors.secondary;
-    canvas.bg.stroke();
-    
-    canvas.bg.beginPath();
-    v = this.drawing.grid;
-    while (v < canvas.bg.canvas.width) {
-      canvas.bg.moveTo(Math.round(v), 0);
-      canvas.bg.lineTo(Math.round(v), canvas.bg.canvas.height);
-      v = v + this.drawing.grid;
-    }
-    h = this.drawing.grid;
-    while (h < canvas.bg.canvas.height) {
-      canvas.bg.moveTo(0, Math.round(h));
-      canvas.bg.lineTo(canvas.bg.canvas.width, Math.round(h));
-      h = h + this.drawing.grid;
-    }
-    canvas.bg.lineWidth = 1;
-    canvas.bg.strokeStyle = colors.primary;
-    canvas.bg.stroke();
-    
-    canvas.f.lineWidth = 2;
-    canvas.f.strokeStyle = colors.default;
-    this.drawing.objects.forEach(function(obj) {
+
+    // draw the objects
+    this.objects.forEach(function(obj) {
       if (obj.color) {
         canvas.f.strokeStyle = obj.color;
       } else {
@@ -102,8 +110,8 @@ export default new function() {
         canvas.f.lineWidth = 2;
       }
       canvas.f.beginPath();
-      if(obj.type === "line") {
-        if(obj.x === obj.u && obj.y === obj.v) {
+      if (obj.type === "line") {
+        if (obj.x === obj.u && obj.y === obj.v) {
           canvas.f.arc(obj.x, obj.y, 0.75, 0, 2 * Math.PI, true);
           canvas.f.stroke();
         } else {
@@ -111,14 +119,14 @@ export default new function() {
           canvas.f.lineTo(obj.u, obj.v);
           canvas.f.stroke();
         }
-      } else if(obj.type === "arc") {
+      } else if (obj.type === "arc") {
         canvas.f.arc(obj.x, obj.y, obj.r, obj.a, obj.b, true);
         canvas.f.stroke();
-      } else if(obj.type === "text") {
+      } else if (obj.type === "text") {
         canvas.f.font = '18px "Routed Gothic"';
         canvas.f.fillStyle = obj.color || colors.default;
         canvas.f.fillText(obj.text, obj.x, obj.y - 1);
-      } else if(obj.type === "eraser") {
+      } else if (obj.type === "eraser") {
         canvas.f.globalCompositeOperation = 'destination-out';
         canvas.f.arc(obj.x, obj.y - canvas.f.canvas.height, obj.r, 0, 2 * Math.PI, true);
         canvas.f.shadowOffsetY = canvas.f.canvas.height;
@@ -130,35 +138,63 @@ export default new function() {
         canvas.f.shadowBlur = 0;
       }
     });
+
+    // leave setup for cursor and preview
     canvas.f.lineWidth = 2;
     canvas.f.strokeStyle = colors.preview;
     canvas.f.fillStyle = colors.cursor;
-  };
+  },
 
-  this.import = function() {
+  import() {
     var upload = document.createElement("input");
     upload.setAttribute("type", "file");
-    upload.onchange = function(e) {
+    upload.onchange = (e) => {
       var reader = new FileReader();
       var file = e.target.files[0];
       reader.readAsText(file, "utf-8");
-      reader.onload = function (e) {
-        var temp = JSON.parse(e.target.result);
-        this.drawing = temp.drawing;
+      reader.onload = (e) => {
+        var parsed = JSON.parse(e.target.result);
 
-        // for previous version saves
-        if(this.drawing.lengthsnap === undefined) {
-          this.drawing.lengthsnap = 1;
-          this.drawing.lensnap = this.drawing.grid / this.drawing.divisions * this.drawing.lengthsnap;
+        // old or new exports
+        var temp = parsed.drawing || parsed;
+
+        this.name = temp.name || 'Drawing';
+        this.points = temp.points || [];
+        this.objects = temp.objects || [];
+
+        if (temp.grid) {
+          options.change('grid', temp.grid, false);
         }
-        if(this.drawing.name === undefined) {
-          this.drawing.name = "Drawing";
+        if (temp.divisions) {
+          options.change('divisions', temp.divisions, false);
         }
-        if(this.drawing.tooltip === undefined) {
-          this.drawing.tooltip = "1";
+
+        // set other options from old exports 
+        // since that's what it used to do
+        // but won't have any effect going forward
+        if (temp.tooltip) {
+          options.change('tooltip', temp.tooltip, false);
         }
-        if(this.drawing.fractions === undefined) {
-          this.drawing.fractions = "0";
+        if (temp.fractions) {
+          options.change('fractions', temp.fractions, false);
+        }
+        if (temp.gridsnap) {
+          options.change('gridsnap', temp.gridsnap, false);
+        }
+        if (temp.lengthsnap) {
+          options.change('lengthsnap', temp.lengthsnap, false);
+        }
+        if (temp.lensnap) {
+          options.change('lensnap', temp.lensnap, false);
+        }
+        if (temp.anglesnap) {
+          options.change('anglesnap', temp.anglesnap, false);
+        }
+        if (temp.snap) {
+          options.change('snap', temp.snap, false);
+        }
+        if (temp.endsnap) {
+          options.change('endsnap', temp.endsnap, false);
         }
 
         // replace old colors with new here
@@ -171,64 +207,101 @@ export default new function() {
           Purple: '#b10dc9',
         };
 
-        this.drawing.objects.forEach(function(obj) {
+        this.objects.forEach(function(obj) {
           if (obj.colour) {
-            if(colorMap[obj.colour]) {
+            if (colorMap[obj.colour]) {
               obj.color = colorMap[obj.colour];
             }
             delete obj.colour;
           }
         });
 
-        document.getElementById("name").value = this.drawing.name;
-        this.refresh();
-      }.bind(this);
-    }.bind(this);
+        // display it all
+        document.getElementById("name").value = this.name;
+        options.sync();
+        storage.set('drawing', this);
+        this.refresh(true);
+      };
+    };
     upload.click();
-  };
+  },
 
-  this.export = function() {
-    var name = document.getElementById("name").value;
-    name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
-    if(name === "") {
-      name = "Drawing";
-    }
-    
-    var temp = new Object();
-    temp.drawing = this.drawing;
-    temp.drawing.name = name;
-    var json = JSON.stringify(temp);
+  xport() {
+    var json = JSON.stringify({
+      name: this.name,
+      grid: options.grid,
+      divisions: options.divisions,
+      points: this.points,
+      objects: this.objects
+    });
+
+    // should tooltip go into the drawing?
 
     if (navigator.msSaveBlob) { // IE
-      navigator.msSaveBlob(new Blob([json], {type : 'application/json'}), name + ".json");
+      navigator.msSaveBlob(new Blob([json], {
+        type: 'application/json'
+      }), this.name + ".json");
     } else {
-
       var link = document.createElement("a");
       link.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(json));
-      link.setAttribute("download", name + ".json");
+      link.setAttribute("download", this.name + ".json");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
-  };
+  },
 
-  this.save = function() {
-    var name = document.getElementById("name").value;
-    name = name.replace(/[^a-z0-9_\-\s.'()]/gi, '');
-    if(name === "") {
-      name = "Drawing";
-    }
+  save() {
     canvas.bg.drawImage(canvas.f.canvas, -0.5, -0.5);
 
     if (navigator.msSaveBlob) { // IE 
-      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), name + ".png"); 
+      navigator.msSaveBlob(canvas.bg.canvas.msToBlob(), this.name + ".png");
     } else {
       var link = document.createElement("a");
       link.setAttribute("href", canvas.bg.canvas.toDataURL('image/png'));
-      link.setAttribute("download", name + ".png");
+      link.setAttribute("download", this.name + ".png");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
-  };
-}
+
+    this.refresh(true);
+  }
+};
+
+var maintab = false;
+
+window.addEventListener("load", function() {
+  // I wanna be the maintab
+  var mt = storage.get('maintab');
+  if (!mt) {
+    storage.set('maintab', 'true');
+    maintab = true;
+
+    // get drawing from storage
+    var stored = storage.get('drawing');
+    if (stored) {
+      drw.name = stored.name;
+      drw.points = stored.points;
+      drw.objects = stored.objects;
+
+      document.getElementById("name").value = drw.name;
+      drw.refresh(true);
+    }
+  }
+});
+
+window.addEventListener("unload", function() {
+  // keep the maintab honest
+  storage.remove('maintab');
+});
+
+window.addEventListener("storage", function() {
+  // don't take the maintab away from me
+  var mt = storage.get('maintab');
+  if (maintab && !mt) {
+    storage.set('maintab', 'true');
+  }
+});
+
+export default drw;

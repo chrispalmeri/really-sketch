@@ -1,15 +1,17 @@
 {
   "name": "really-sketch",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Simple online graph paper with basic drafting tools. Mobile friendly.",
-  "main": "app/js/bundle.js",
+  "main": "app/js/bundle.min.js",
   "scripts": {
     "serve": "npm-run-all -p serve:*",
-    "serve:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs -w",
+    "serve:rollup": "rollup -c -w",
     "serve:hugo": "hugo server -ws site",
     "build": "npm-run-all -s build:*",
-    "build:rollup": "rollup src/index.js -o site/assets/js/bundle.js -f cjs",
-    "build:hugo": "hugo -s site -d ../dist"
+    "build:rollup": "rollup -c",
+    "build:hugo": "hugo -s site -d ../dist",
+    "lint": "jshint src/",
+    "clean": "js-beautify -r src/*/*.js src/*.js"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,14 @@
   },
   "homepage": "https://github.com/chrispalmeri/really-sketch#readme",
   "devDependencies": {
-    "hugo-bin": "^0.43.6",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@rollup/plugin-babel": "^5.0.0",
+    "hugo-bin": "^0.58.0",
+    "js-beautify": "^1.11.0",
+    "jshint": "^2.11.1",
     "npm-run-all": "^4.1.5",
-    "rollup": "^1.32.1"
+    "rollup": "^2.10.2",
+    "rollup-plugin-terser": "^5.3.0"
   }
 }

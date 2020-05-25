@@ -1,9 +1,21 @@
-import drawing from './../drawing.js';
-import colors from './../colors.js';
+// functions/selectChange.js
 
-window.addEventListener("load", function () {
-  var selects = document.getElementsByTagName("select");
+import drawing from './../drawing.js';
+import options from './../options.js';
+
+window.addEventListener("load", function() {
+  var selects = document.getElementById('options').getElementsByTagName("select");
   Array.prototype.forEach.call(selects, selectHandler);
+
+  // this maybe should go in drawing, but it is a class so not sure how
+  document.getElementById("name").addEventListener("change", e => {
+    var desired = e.target.value.replace(/[^a-z0-9_\-\s.'()]/gi, '');
+    if (desired === "") {
+      desired = "Drawing";
+    }
+    drawing.setName(desired);
+    document.getElementById("name").value = desired;
+  });
 });
 
 function selectHandler(select) {
@@ -11,53 +23,38 @@ function selectHandler(select) {
 }
 
 export default function selectChange(e) {
-  var youClicked = {
-    "color-theme": function () {
-      colors.theme(e.target.value);
-      drawing.refresh();
+  var youChanged = {
+    "colortheme": function() {
+      options.change('colortheme', e.target.value);
+      drawing.refresh(true);
     },
-    "grid": function () {
-      drawing.drawing.grid = 96 / e.target.value;
-      drawing.drawing.snap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.gridsnap;
-      drawing.drawing.lensnap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.lengthsnap;
-      drawing.refresh();
+    "grid": function() {
+      options.change('grid', 96 / e.target.value);
+      drawing.refresh(true);
     },
-    "divisions": function () {
-      drawing.drawing.divisions = e.target.value;
-      drawing.drawing.snap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.gridsnap;
-      drawing.drawing.lensnap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.lengthsnap;
-      drawing.refresh();
+    "divisions": function() {
+      options.change('divisions', e.target.value);
+      drawing.refresh(true);
     },
-    "tooltip": function () {
-      drawing.drawing.tooltip = e.target.value;
+    "tooltip": function() {
+      options.change('tooltip', e.target.value);
     },
-    "fractions": function () {
-      drawing.drawing.fractions = e.target.value;
+    "fractions": function() {
+      options.change('fractions', e.target.value);
     },
-    "gridsnap": function () {
-      drawing.drawing.gridsnap = e.target.value;
-      drawing.drawing.snap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.gridsnap;
-      drawing.refresh();
+    "gridsnap": function() {
+      options.change('gridsnap', e.target.value);
     },
-    "lengthsnap": function () {
-      drawing.drawing.lengthsnap = e.target.value;
-      drawing.drawing.lensnap = drawing.drawing.grid / drawing.drawing.divisions * drawing.drawing.lengthsnap;
-      drawing.refresh();
+    "lengthsnap": function() {
+      options.change('lengthsnap', e.target.value);
     },
-    "anglesnap": function () {
-      drawing.drawing.anglesnap = e.target.value;
-      drawing.refresh();
+    "anglesnap": function() {
+      options.change('anglesnap', e.target.value);
     },
-    "endsnap": function () {
-      drawing.drawing.endsnap = e.target.value;
-      drawing.refresh();
-    },
-    "line_color": function() {
-      // this is just here to not throw an error for undefined function
-    },
-    "line_width": function() {
-      // ditto
+    "endsnap": function() {
+      options.change('endsnap', e.target.value);
     }
-  }
-  youClicked[e.target.id]();
+  };
+
+  youChanged[e.target.id]();
 }

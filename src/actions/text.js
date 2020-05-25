@@ -1,3 +1,5 @@
+// actions/text.js
+
 import help from './../help.js';
 import interaction from './../interaction.js';
 import snap from './../snap.js';
@@ -7,10 +9,16 @@ import mouse from './../mouse.js';
 import tool from './../tool.js';
 import colors from './../colors.js';
 
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   document.getElementById("text-input").addEventListener("keyup", function() {
-    tool.a = new Text();
+    tool.change(new Text());
   });
+
+  if (document.fonts) {
+    document.fonts.ready.then(function() {
+      drawing.refresh();
+    });
+  }
 });
 
 export default function Text() {
@@ -22,16 +30,16 @@ export default function Text() {
   this.coords.text = document.getElementById("text-input").value;
 
   this.click = function(x, y) {
-    if(this.coords.text !== '') {
+    if (this.coords.text !== '') {
       this.save();
       this.reset();
     }
   };
 
   this.reset = function() {
-    tool.a = new Text();
+    tool.change(new Text());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {
@@ -53,7 +61,7 @@ export default function Text() {
     if (selectedColor) {
       this.coords.color = selectedColor;
     }
-    drawing.drawing.objects.push(this.coords);
+    drawing.addItem(this.coords);
     mouse.hide();
   };
 }

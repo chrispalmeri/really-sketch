@@ -1,11 +1,23 @@
 ---
 title: "Changelog"
-date: 2020-05-15T18:47:00-05:00
+date: 2020-05-24T22:47:00-05:00
 menu: learn
 weight: 2
 ---
 
 Changes to this project will be documented here.
+
+### [0.3.5] - 2020-05-24
+
+  * Add drawing and options to local storage to preserve between sessions
+  * Add button in options to clear the drawing
+  * Remove most options from export files
+  * Fix project name not reflecting sanitized name
+  * Fix display glitch when generating PNG
+  * Fix initial font loading, except for IE/Edge
+  * Fix dialog position/scrollbar in IE/Edge
+  * Fix fraction size/uniformity across browsers
+  * Fix a lot of code cleanup items and improve performance
 
 ### [0.3.4] - 2020-05-15
 

@@ -12,6 +12,7 @@
   --background: #ffffff; /* mainly dialog tabs */
   --sidebar: #eeeeee; /* and keyboard shortcuts */
   --accent: #ffa0a0; /* just for tab highlight */
+  --danger: #ff7676; /* clear button hover */
   --link: #5f94c8; /* just for about section */
 }
 body.dark, body.blue {
@@ -23,6 +24,7 @@ body.dark, body.blue {
   --background: #121212;
   --sidebar: #272727;
   --accent: #a13131;
+  --danger: #c73c3c;
   --link: #52789e;
 }
 
@@ -69,6 +71,10 @@ footer {
   display: none;
 }
 
+sup, sub {
+  font: 10px sans-serif;
+}
+
 /* division */
 
 body {
@@ -113,7 +119,6 @@ select {
   float: right;
   width: 100px;
 }
-/* removed ", #about a" from next three rules */
 button, .actions a {
   color: #000000;
   color: var(--text);
@@ -150,7 +155,6 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-/* removed ", #about a" from following rule */
 .actions button, .actions a {
   width: 64px;
   position: relative;
@@ -186,10 +190,11 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 }
 .dialog div {
   position: absolute;
-  top: 50%;
+  bottom: 50%;
   left: 32px;
   right: 32px;
-  transform: translate(0, -50%);
+  transform: translate(0, 50%);
+  width: 75%;
   max-width: 440px;
   background: #fff;
   background: var(--background);
@@ -232,7 +237,7 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   fill: var(--text);
 }
 .dialog aside {
-  height: 258px; /*248px;*/ /* 334 - header */
+  height: 258px;
   width: 30%;
   float: left;
   background: #EEEEEE;
@@ -286,19 +291,20 @@ button::-moz-focus-inner, select::-moz-focus-inner {
   border: 1px solid var(--border);
   border-radius: 2px;
 }
-/* removed ", #about a" from following rule */
 .dialog section button {
   float: right;
   width: 100px;
   padding: 3px 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-/* #about input {
-  text-align: center;
+#clear {
+  background: #ffa0a0;
+  background: var(--accent);
 }
-input:disabled {
-  background: #eee;
-} */
+#clear:hover, #clear:focus {
+  background: #ff7676;
+  background: var(--danger);
+}
 #about a {
   color: #5F94C8;
   color: var(--link);
@@ -324,10 +330,6 @@ input:disabled {
   border: 1px solid var(--border);
   border-radius: 2px;
   margin-left: 8px;
-}
-
-#color-button, #interface-link {
-  display: none;
 }
 
 /* theme items that couldn't use vars */

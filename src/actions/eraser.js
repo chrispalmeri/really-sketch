@@ -1,9 +1,12 @@
+// actions/eraser.js
+
 import help from './../help.js';
 import interaction from './../interaction.js';
 import canvas from './../canvas.js';
 import drawing from './../drawing.js';
 import mouse from './../mouse.js';
 import tool from './../tool.js';
+import options from './../options.js';
 
 export default function Eraser() {
   help(interaction.text + " to position eraser");
@@ -18,19 +21,19 @@ export default function Eraser() {
   };
 
   this.reset = function() {
-    tool.a = new Eraser();
+    tool.change(new Eraser());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {
-    if(this.points === 0) {
+    if (this.points === 0) {
       this.coords.x = x;
       this.coords.y = y;
-      if(drawing.drawing.snap === 0) {
+      if (options.snap === 0) {
         this.coords.r = 16;
       } else {
-        this.coords.r = drawing.drawing.snap - 1;
+        this.coords.r = options.snap - 1;
       }
 
       canvas.f.beginPath();
@@ -43,7 +46,7 @@ export default function Eraser() {
   };
 
   this.save = function() {
-    drawing.drawing.objects.push(this.coords);
+    drawing.addItem(this.coords);
     mouse.hide();
   };
 }

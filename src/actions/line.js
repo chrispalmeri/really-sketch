@@ -1,3 +1,5 @@
+// actions/line.js
+
 import help from './../help.js';
 import interaction from './../interaction.js';
 import snap from './../snap.js';
@@ -15,29 +17,29 @@ export default function Line() {
 
   this.click = function(x, y) {
     this.points = this.points + 1;
-    if(this.points === 1) {
+    if (this.points === 1) {
       help(interaction.text + " to set line end point");
-    } else if(this.points === 2) {
+    } else if (this.points === 2) {
       this.save();
       this.reset();
     }
   };
 
   this.reset = function() {
-    tool.a = new Line();
+    tool.change(new Line());
     drawing.refresh();
-    tool.a.move(mouse.x, mouse.y);
+    tool.move(mouse.x, mouse.y);
   };
 
   this.move = function(x, y) {
     var snapped;
-    if(this.points === 0) {
+    if (this.points === 0) {
       snapped = snap(x, y);
       this.coords.x = snapped.x;
       this.coords.y = snapped.y;
-    } else if(this.points === 1) {
+    } else if (this.points === 1) {
       snapped = snap(x, y, this.coords.x, this.coords.y);
-      
+
       this.coords.u = snapped.x;
       this.coords.v = snapped.y;
       canvas.f.beginPath();
@@ -56,9 +58,9 @@ export default function Line() {
       this.coords.color = selectedColor;
     }
     this.coords.width = document.getElementById('line_width').value;
-    drawing.drawing.objects.push(this.coords);
-    drawing.drawing.points.push([this.coords.x, this.coords.y]);
-    drawing.drawing.points.push([this.coords.u, this.coords.v]);
+    drawing.addItem(this.coords);
+    drawing.addSnap([this.coords.x, this.coords.y]);
+    drawing.addSnap([this.coords.u, this.coords.v]);
     mouse.hide();
   };
 }
