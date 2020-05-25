@@ -1,13 +1,13 @@
 ---
 title: "Changelog"
-date: 2020-05-15T18:47:00-05:00
+date: 2020-05-24T22:47:00-05:00
 menu: learn
 weight: 2
 ---
 
 Changes to this project will be documented here.
 
-### [0.3.5] - Unreleased
+### [0.3.5] - 2020-05-24
 
   * Add drawing and options to local storage to preserve between sessions
   * Add button in options to clear the drawing
