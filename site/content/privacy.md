@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-date: 2020-05-02T15:53:00-05:00
+date: 2020-11-02T20:07:00-05:00
 menu: legal
 weight: 2
 ---
@@ -13,31 +13,34 @@ using it. The Website is committed to ensuring that your privacy is protected.
 
 ### Information we Collect
 
-By using this website The Website may collect data including IP address,
-operating system, web browser, screen resolution, pages visited and time spent
-on the Website.
+The Website does not collect or store any personal or identifiable data. You are
+not required to create an account or provide any personal information to use the
+Website. The Website does not use cookies to store your information or track
+activity across other websites.
 
-The Website may make use of third party providers to collect website usage data,
-as such these third party providers may use cookies to store that information
-and track activity across more than just this Website.
+The website application settings and content you create are saved locally on
+your device and are not transfered to, or stored by the Website.
+
+The Website may make use of third party providers to collect website usage data
+including but not limited to IP address, operating system, web browser, screen
+resolution, pages visited, and time spent on the Website.
+
+These third party providers include [Netlify](https://www.netlify.com/gdpr-ccpa)
+which provides hosting and [Plausible](https://plausible.io/data-policy) which
+proivides analytics. You may reference their data policies in regard to visitor
+data.
 
 ### How We Use this Information
 
-The information gathered by the Website is used soley for the purposes of
-understanding how people are using this site, for the purposes of improving the
-experience, and gauging its performance.
+The information gathered by the Website is used soley for understanding how
+people are using this site, for the purposes of improving the experience, and
+gauging its performance.
 
-Third party providers may agregate data we collect with other users data for
+Third party providers may agregate data collected with other users data for
 improving their own services or identifying trends.
 
 We will never sell or share your personal information. Neither will we contact
 you in any way or use your information for marketing purposes.
-
-### What You Can Do
-
-If you would like to limit the amount of information collected you can change
-your web browser settings to block certain cookies or disable cookies all
-together. Having cookies disabled will not affect your use of this website.
 
 ### Policy Changes
 
