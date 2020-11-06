@@ -14,7 +14,7 @@ Deployed to [netlify](https://app.netlify.com/sites/reallysketch/deploys).
 
 Clone the repo and then `npm install`.
 
-`npm run serve` to run locally.
+`npm run serve` to run locally at http://localhost:1313/.
 
 `npm run build` to output to `dist/`.
 
