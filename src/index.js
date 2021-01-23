@@ -56,3 +56,16 @@ window.addEventListener("keydown", function(e) {
     }
   }
 });
+
+window.addEventListener("beforeprint", function() {
+  // assumes Letter, Portrait, 0.5" margins
+  document.body.style.width = '720px';
+  document.body.style.height = '960px';
+  drawing.refresh(true);
+});
+
+window.addEventListener("afterprint", function() {
+  document.body.style.width = '100%';
+  document.body.style.height = '100%';
+  drawing.refresh(true);
+});

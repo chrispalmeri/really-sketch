@@ -337,3 +337,9 @@ button::-moz-focus-inner, select::-moz-focus-inner {
 .dark select, .blue select {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><polygon fill='%23747474' points='1,2 5,9 9,2'></polygon></svg>");
 }
+
+@media print {
+  .actions, #options, #help, #coords {
+    display: none !important;
+  }
+}
