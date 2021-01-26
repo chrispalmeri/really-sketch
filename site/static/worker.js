@@ -1,6 +1,6 @@
 // worker.js
 
-const CACHE_NAME = 'whatever';
+const CACHE_NAME = '0.3.5';
 const FILES_TO_CACHE = [
   '/app/',
   '/app/index.html',
@@ -14,23 +14,48 @@ const FILES_TO_CACHE = [
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(FILES_TO_CACHE);
-      })
+    .then(function(cache) {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys()
+    .then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
 });
 
 self.addEventListener('fetch', function(event) {
-  if(event.request.mode !== 'navigate') {
-    return;
-  }
   event.respondWith(
-    fetch(event.request)
-      .catch(() => {
-        return caches.open(CACHE_NAME)
-          .then((cache) => {
-            return cache.match(event.request);
-          })
-      })
+    caches.open(CACHE_NAME)
+    .then(function (cache) {
+      return cache.match(event.request, {ignoreVary: true})
+      .then(function (response) {
+        var fetchPromise = fetch(event.request)
+        .then(function (networkResponse) {
+          if (response && networkResponse.ok) {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        })
+        .catch(function(error) {
+          return new Response(null, {
+            'status': 503,
+            'statusText': 'Service Unavailable'
+          });
+        });
+        return response || fetchPromise;
+      });
+    })
   );
 });

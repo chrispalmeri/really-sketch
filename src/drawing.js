@@ -291,7 +291,7 @@ window.addEventListener("load", function() {
   }
 });
 
-window.addEventListener("unload", function() {
+window.addEventListener("pagehide", function() {
   // keep the maintab honest
   storage.remove('maintab');
 });
